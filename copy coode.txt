@@ -1,0 +1,1539 @@
+let winCounter = 0;
+let loseCounter = 0;
+let drawCounter = 0;
+
+function compChoice(param1, param2, param3){
+
+let gameStrings = [param1, param2, param3];
+// this line of code below tells the computer to pick randomly out of the parameters in the game strings variable
+let randomChoice = Math.floor(Math.random() * gameStrings.length);
+
+let selectedChoice = gameStrings[randomChoice];
+
+
+return selectedChoice;
+
+ }
+
+ // we equate some parameters to the choices in the in the game so that the computer can pick from them
+
+ let choice1 = "ROCK";
+ let choice2 = "PAPER";
+ let choice3 = "SCISSORS";
+
+ // We parse the computer choices set in the parameter to the function
+ let selectedParameter = compChoice(choice1, choice2, choice3);
+
+ console.log("Computer picks " + selectedParameter);
+
+ 
+function gameRound() {
+
+
+
+if (playerUpper === "ROCK" && selectedParameter === "ROCK"){
+
+
+console.log("It's a draw")
+drawCounter++;
+
+}
+else if (playerUpper === "PAPER" && selectedParameter === "PAPER"){
+
+
+buttonOne.addEventListener('click', function(){
+
+
+   
+
+if (numberDisplay.textContent == "0" || opBar.textContent ==){
+
+numberDisplay.textContent = "1"
+
+}
+
+
+
+
+else if (numberDisplay.textContent.length == 9){
+
+return;
+}
+
+else{
+
+    numberDisplay.textContent += "1";
+
+}
+
+})
+
+clearButton.addEventListener('click', function(){
+
+numberDisplay.textContent = "0"
+
+});
+
+
+buttonTwo.addEventListener('click', function(){
+
+    if (numberDisplay.textContent == "0"){
+
+        numberDisplay.textContent = "2"
+        
+        }
+        else if (numberDisplay.textContent.length == 9){
+
+            return;
+            }
+        
+        else{
+        
+            numberDisplay.textContent += "2";
+        
+        }
+        
+
+
+});
+
+
+buttonThree.addEventListener('click', function(){
+
+    if (numberDisplay.textContent == "0"){
+
+        numberDisplay.textContent = "3"
+        
+        }
+        else if (numberDisplay.textContent.length == 9){
+
+            return;
+            }
+        else{
+        
+            numberDisplay.textContent += "3";
+        
+        }
+        
+
+});
+
+buttonFour.addEventListener('click', function(){
+
+    if (numberDisplay.textContent == "0"){
+
+        numberDisplay.textContent = "4"
+        
+        }
+        else if (numberDisplay.textContent.length == 9){
+
+            return;
+            }
+        
+        else{
+        
+            numberDisplay.textContent += "4";
+        
+        }
+        
+
+});
+
+buttonFive.addEventListener('click', function(){
+
+    if (numberDisplay.textContent == "0"){
+
+        numberDisplay.textContent = "5"
+        
+        }
+        else if (numberDisplay.textContent.length == 9){
+
+            return;
+            }
+        
+        else{
+        
+            numberDisplay.textContent += "5";
+        
+        }
+
+});
+
+    buttonSix.addEventListener('click', function(){
+
+        if (numberDisplay.textContent == "0"){
+
+            numberDisplay.textContent = "6"
+            
+            }
+            else if (numberDisplay.textContent.length == 9){
+    
+                return;
+                }
+            
+            else{
+            
+                numberDisplay.textContent += "6";
+            
+            }
+
+    });
+
+    buttonSeven.addEventListener('click', function(){
+
+        if (numberDisplay.textContent == "0"){
+
+            numberDisplay.textContent = "7"
+            
+            }
+            else if (numberDisplay.textContent.length == 9){
+    
+                return;
+                }
+            
+            else{
+            
+                numberDisplay.textContent += "7";
+            
+            }
+    });
+
+
+        buttonEight.addEventListener('click', function(){
+
+            if (numberDisplay.textContent == "0"){
+
+                numberDisplay.textContent = "8"
+                
+                }
+                else if (numberDisplay.textContent.length == 9){
+        
+                    return;
+                    }
+                
+                else{
+                
+                    numberDisplay.textContent += "8";
+                
+                }
+        })
+
+
+        buttonNine.addEventListener('click', function(){
+
+
+            if (numberDisplay.textContent == "0"){
+
+                numberDisplay.textContent = "9"
+                
+                }
+                else if (numberDisplay.textContent.length == 9){
+        
+                    return;
+                    }
+                
+                else{
+                
+                    numberDisplay.textContent += "9";
+                
+                }
+
+        });
+
+        buttonZero.addEventListener('click', function(){
+            if (numberDisplay.textContent == "0"){
+
+                numberDisplay.textContent = "0"
+                
+                }
+                else if (numberDisplay.textContent.length == 9){
+        
+                    return;
+                    }
+                
+                else{
+                
+                    numberDisplay.textContent += "0";
+                
+                }
+
+        });
+
+    buttonAdd.addEventListener('click', function(){
+opBar.textContent = "add";
+
+
+    })
+
+
+    console.log("It's a draw");
+    drawCounter++;
+
+}
+
+else if (playerUpper === "SCISSORS" && selectedParameter === "SCISSORS") {
+
+console.log("It's a draw");
+drawCounter++
+
+}
+
+else if (playerUpper === "ROCK" && selectedParameter === "PAPER")
+{
+console.log ("You lose! Paper beats rock");
+loseCounter++
+
+}
+else if (playerUpper === "PAPER" && selectedParameter === "SCISSORS"){
+
+
+console.log("You lose! Scissors beats paper");
+loseCounter++;
+}
+else if (playerUpper === "SCISSORS" && selectedParameter === "ROCK")
+{
+console.log("You lose! Rock beats Scissors");
+loseCounter++
+}
+else if (playerUpper === "ROCK" && selectedParameter === "SCISSORS")
+{
+console.log("You win! Rock beats Scissors");
+winCounter++;
+}
+else if (playerUpper === "PAPER" && selectedParameter === "ROCK")
+{
+console.log("You win! Paper beats Rock")
+winCounter++
+}
+else if (playerUpper === "SCISSORS" && selectedParameter === "PAPER")
+{
+console.log("You Win! Scissors beats Paper")
+winCounter++
+}
+else{
+
+    console.log("Wrong Parameters")
+}
+
+
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+gameRound();
+
+
+}
+ 
+if (loseCounter > winCounter && winCounter > drawCounter){
+
+    console.log("YOU LOSE THIS ROUND!");
+}
+else if (winCounter > drawCounter && winCounter > loseCounter){
+
+    console.log("YOU WIN THIS ROUND!");
+}
+else if ( drawCounter > winCounter && drawCounter > loseCounter){
+    alert("The draws for this round is more than the wins and losses,refresh the page ");
+}
+
+
+console.log(" Scores for this round: " + "Wins: " + winCounter + " Draws: " + drawCounter + " Losses: " + loseCounter);
+
+
+    let regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+    let result = string.replace(regex, "");
+
+let numberDisplay = document.querySelector('.num-display');
+let buttonOne = document.querySelector('.one');
+let buttonTwo = document.querySelector('.two');
+let buttonThree = document.querySelector('.three');
+let buttonFour = document.querySelector('.four');
+let buttonFive = document.querySelector('.five');
+let buttonSix = document.querySelector('.six');
+let buttonSeven = document.querySelector('.seven');
+let buttonEight = document.querySelector('.eight');
+let buttonNine = document.querySelector('.nine');
+let clearButton = document.querySelector('.clear');
+let buttonZero = document.querySelector('.zero');
+let buttonEquals = document.querySelector('.equal-to');
+let buttonMultiply = document.querySelector('.multiply');
+let buttonAdd = document.querySelector('.add');
+let buttonSub = document.querySelector('.sub');
+let buttonDivide = document.querySelector('.divide');
+let opBar = document.querySelector('.operation-bar');
+
+
+
+background: linear-gradient(120deg, #FF00C7 0%, #51003F 100%), linear-gradient(120deg, #0030AD 0%, #00071A 100%), linear-gradient(180deg, #000346 0%, #FF0000 100%), linear-gradient(60deg, #0029FF 0%, #AA0014 100%), radial-gradient(100% 165% at 100% 100%, #FF00A8 0%, #00FF47 100%), radial-gradient(100% 150% at 0% 0%, #FFF500 0%, #51D500 100%);
+background-blend-mode: overlay, color-dodge, overlay, overlay, difference, normal;
+
+HIIT project content***
+  About
+  Services
+  Projects
+  Contact
+
+  We are creatives
+
+  Transform your brand
+
+  We are a full-service creative agency specializing in helping brands grow fast. 
+  Engage your clients through compelling visuals that do most of the marketing for you.
+
+  Learn more
+
+  Stand out to the right audience
+
+  Using a collaborative formula of designers, researchers, photographers, videographers, and copywriters, we’ll build and extend your brand in digital places. 
+
+  Learn more
+
+  Graphic design
+  Great design makes you memorable. We deliver artwork that underscores your brand message and captures potential clients’ attention.
+
+  Photography
+  Increase your credibility by getting the most stunning, high-quality photos that improve your business image.
+
+  Client testimonials
+
+  We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit.
+  Emily R.
+  Marketing Director
+
+  Sunnyside’s enthusiasm coupled with their keen interest in our brand’s success made it a satisfying and enjoyable experience.
+  Thomas S.
+  Chief Operating Officer
+
+  Incredible end result! Our sales increased over 400% when we worked with Sunnyside. Highly recommended!
+  Jennie F.
+  Business Owner
+
+  About
+  Services
+  Projects
+  Contact
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+
+quired>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+</body>
+
+const openModalBtn = document.getElementById("openModalBtn");
+openModalBtn.addEventListener("click", function() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "block";
+});
+
+// Close the modal when the close button is clicked
+const closeButton = document.getElementsByClassName("close")[0];
+closeButton.addEventListener("click", function() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+});
+
+// Handle form submission
+const form = document.getElementById("myForm");
+form.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the form from submitting
+
+  // Get the form values
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+
+  // Use the form values as needed
+  console.log("Name:", name);
+  console.log("Email:", email);
+
+  // Clear the form inputs
+  form.reset();
+
+  // Close the modal
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+});
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+  }
+  .close {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: red;
+  }
+
+let myLibrary = [];
+
+
+hnvgfgf
+
+
+const colors = ["#67e8f9", "#fecaca", "#facc15", "#6366f1", "#fae8ff"]
+
+
+boxes.forEach(function (box) {
+  box.addEventListener("click", function () {
+    if (currentTurn == 1 && box.textContent == "") {
+      box.textContent = player1.marker;
+      currentTurn = 2;
+    } else if (currentTurn == 2 && box.textContent == "") {
+      box.textContent = player2.marker;
+      currentTurn = 1;
+    } else {
+      alert("Enter into an empty box");
+    }
+  });
+});
+
+  function Players (name, marker) {
+    this.name = name;
+    this.marker = marker;
+
+  }
+
+  const playerX = new Players (playerOneName.value, 'X')
+  const playerO = new Players (playerOneName.value, 'O')
+  
+
+
+
+
+let displayButton = 1;
+
+ submitBtn.addEventListener("click", function () {
+  displayButton = 2;
+  submitted = 2;
+  const playerOneInput = playerOneName.value;
+  const playerTwoInput = playerTwoName.value;
+  draw.style.display = "flex";
+  const gapValue = "10px";
+  drawDisplay.textContent = drawCounter;
+  draw.style.gap = gapValue;
+
+  winnerOne.textContent =
+    playerOneName.value.toUpperCase() + " : " + oneCounter;
+  winnerTwo.textContent =
+    playerTwoName.value.toUpperCase() + " : " + twoCounter;
+  if (playerOneInput !== "" && playerTwoInput !== "") {
+    openFirstPlayer();
+    pName.textContent = playerOneInput.toUpperCase() + " STARTS AS X!!";
+  } else {
+    openFirstPlayer();
+    pName.textContent = "PLEASE FILL THE NAME BARS!!!";
+  }
+});
+
+
+function roundCheck(){
+if (displayButton === 2){
+  playAgain.style.display = "none"
+}
+else if (oneCounter === 3){
+    pName.textContent = playerOneName.value.toUpperCase() + " WINS THIS ROUND"
+    playAgain.style.display = "block"
+
+  }
+  else if (twoCounter === 3){
+    pName.textContent = playerTwoName.value.toUpperCase() + " WINS THIS ROUND "
+    playAgain.style.display = "block"
+  }
+  else if ( drawCounter === 3){
+    pName.textContent = "THIS ROUND ENDS AS A DRAW"
+    playAgain.style.display = "block"
+    
+  }
+}
+reset.addEventListener("click", function () {
+  displayButton = 1;
+  closeModal();
+  clearName();
+  clearBoxes();
+  winnerOne.textContent = "";
+  winnerTwo.textContent = "";
+  draw.style.display = "none";
+  submitted = 1;
+
+});
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+}
+
+function addToProjectDivs() {
+  const newProjectDiv = document.createElement("div");
+  const projectImage = document.createElement("img");
+  projectImage.src = "images/list-box.svg";
+  const newProjectText = document.createElement("div");
+  newProjectText.style.display = "flex";
+  const projectImageTwo = document.createElement("img");
+  projectImageTwo.src = "images/delete.svg";
+  projectImageTwo.classList.add("img-filter");
+  newProjectDiv.classList.add("add2");
+  newProjectText.textContent = projectInput.value;
+
+  if (newProjectText.textContent != "") {
+    newProjectDiv.appendChild(projectImage);
+    newProjectDiv.appendChild(newProjectText);
+    newProjectDiv.appendChild(projectImageTwo);
+    projectContent.appendChild(newProjectDiv);
+
+    localStorage.setItem("projectContent", projectContent.innerHTML);
+  } else {
+    alert("Enter Project");
+  }
+  projectImageTwo.addEventListener("click", function () {
+    projectContent.removeChild(newProjectDiv);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("projectContent")) {
+    const storedProjectContent = localStorage.getItem("projectContent");
+    projectContent.innerHTML = storedProjectContent;
+
+    // Attach event listeners to the delete buttons
+    const deleteButtons = projectContent.querySelectorAll(".img-filter");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const divToRemove = button.parentNode;
+        projectContent.removeChild(divToRemove);
+        // Update the stored projectContent HTML in localStorage after removing the element
+        setTimeout(function () {
+          localStorage.setItem("projectContent", projectContent.innerHTML);
+        },0);
+      });
+    });
+
+    const readd = projectContent.querySelector(".add");
+    readd.addEventListener("click", function () {
+      openProjectModal(projectModal);
+    });
+  }
+});
+
+function addToTodaysDivs() {
+  const newTodayDivs = document.createElement("div");
+  const todayImage = document.createElement("img");
+  todayImage.src = "images/format-list-bulleted.svg";
+  const newTodayText = document.createElement("div");
+  newTodayText.style.display = "flex";
+  const todayImageTwo = document.createElement("img");
+  todayImageTwo.src = "images/delete.svg";
+  todayImageTwo.classList.add("img-filter");
+  newTodayDivs.classList.add("add3");
+  newTodayText.textContent = todayInput.value;
+
+
+  if (newTodayText.textContent != "") {
+    newTodayDivs.appendChild(todayImage);
+    newTodayDivs.appendChild(newTodayText);
+    newTodayDivs.appendChild(todayImageTwo);
+    todayDivs.appendChild(newTodayDivs);
+
+    localStorage.setItem("todayDivs", todayDivs.innerHTML);
+  } else {
+    alert("Enter today's Task");
+  }
+  const deleteButtons = todayDivs.querySelectorAll(".img-filter");
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const divToRemove = button.parentNode;
+      todayDivs.removeChild(divToRemove);
+      // Update the stored todayDivs HTML in localStorage after removing the element
+      localStorage.setItem("todayDivs", todayDivs.innerHTML);
+    });
+  });
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("projectContent")) {
+    const storedProjectContent = localStorage.getItem("projectContent");
+    projectContent.innerHTML = storedProjectContent;
+
+    // Attach event listeners to the delete buttons
+    const deleteButtons = projectContent.querySelectorAll(".img-filter");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const divToRemove = button.parentNode;
+        projectContent.removeChild(divToRemove);
+        // Update the stored projectContent HTML in localStorage after removing the element
+        localStorage.setItem("projectContent", projectContent.innerHTML);
+      });
+    });
+
+    const readd = projectContent.querySelector(".add");
+    readd.addEventListener("click", function () {
+      openProjectModal(projectModal);
+    });
+  }
+
+  if (localStorage.getItem("todayDivs")) {
+    const storedTodayContents = localStorage.getItem("todayDivs");
+    todayDivs.innerHTML = storedTodayContents;
+
+    // Attach event listeners to the delete buttons
+    const deleteButtons = todayDivs.querySelectorAll(".img-filter");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const divToRemove = button.parentNode;
+        todayDivs.removeChild(divToRemove);
+        // Update the stored todayDivs HTML in localStorage after removing the element
+        localStorage.setItem("todayDivs", todayDivs.innerHTML);
+      });
+    });
+  }
+});
+  <div class="today-page">
+          <div class="the-today">
+            <span class="today-heading"><h1>Today</h1></span>
+            <div class="today-add">
+              <img src="images/plus.svg" alt="" class="today-image-add" />
+              <div>Add Tasks</div>
+            </div>
+            <div class="contents-today"></div>
+          </div> 
+
+  function projectPage(){
+    const projectPage = document.createElement('div')
+    const theToday = document.createElement('div')
+    theToday.classList.add('the-project')
+    const projectHeading = document.createElement('span')
+    const headingText = document.createElement('h1')
+    headingText.textContent = 
+    projectHeading.appendChild(headingText)
+  }
+	
+const newDivs = document.querySelectorAll(".project-text");
+    newDivs.forEach((button) => {
+      let buttonText = button.textContent;
+      button.addEventListener("click", () => {
+        alert(buttonText);
+      });
+    });
+
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+#container img{width:100%;}
+#container{width:250px; height:250px; overflow:hidden; border:1px solid #000;} 
+
+
+'http://api.weatherapi.com/v1/current.json?key=3a4fa662aa3046fdaa284241231206&q=London&aqi=yes'
+
+
+// fetch('http://api.weatherapi.com/v1/current.json?key=3a4fa662aa3046fdaa284241231206&q=London&aqi=yes')
+//     .then(res =>{
+//         if(!res.ok){
+//             console.log('problem')
+//         }
+//         return  res.json()
+//     })
+//     .then(data =>{
+//         console.log(data)
+//         pEl.innerHTML = data.current.condition.text
+//     })
+//     .catch(error =>{
+//         console.log(error)
+//     })
+
+
+const imgEl = document.querySelector("img");
+const textInput = document.querySelector(".textinput");
+const updateBtn = document.querySelector(".update");
+const para = document.querySelector("p");
+const trr = textInput.value;
+
+
+const updateImage = async () => {
+  try {
+    const trr = textInput.value;
+
+    const res = await fetch(
+      "https://api.giphy.com/v1/gifs/translate?api_key=3vuyemKx2t5zKctx7begsvSdNlob0lcj&s=" +
+        trr +
+        "&weirdness=4"
+    );
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.log("problem");
+      return;
+    }
+    console.log(data);
+    imgEl.src = data.data.images.original.url;
+  } catch (error) {
+    console.log(error);
+    para.innerHTML = error;
+  }
+};
+
+updateImage();
+
+updateBtn.addEventListener("click", () => {
+  location.reload();
+  updateImage;
+});
+
+/* Button styling */
+.submit-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Button hover effect */
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Button animation */
+  .submit-button.loading {
+    pointer-events: none; /* Disable clicking during animation */
+  }
+
+what is the best way to apply edit buttons to object items in an array in order to edit the elements of that array for example my credentials array
+
+  .submit-button.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 4px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+This is a simple weather application that displays the current weather information for a specified location. Users can enter a city name in the input field, and the app will fetch and display the weather details using the WeatherAPI.
+
+Features
+Displays the location name, temperature, weather description, humidity, wind speed, and current time.
+Allows users to enter a city name to get the weather information for that location.
+Shows an error modal if there are any issues with fetching the weather data.
+Technologies Used
+HTML
+CSS
+JavaScript
+Usage
+Clone the repository or download the source code.
+Open the index.html file in a web browser.
+Enter the name of a city in the input field.
+Click the "Submit" button to fetch and display the weather information for the specified city.
+The weather details will be shown in the app, including the temperature, weather description, humidity, wind speed, and current time.
+If there are any errors in fetching the weather data, an error message will be displayed in a modal.
+Credits
+WeatherAPI - Used to fetch weather data.
+License
+This project is licensed under the MIT License.
+
+
+const MyButton = () =>{
+  return (
+    <button>I am a button</button>
+  );
+}
+
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Wellcome to My app</h1>
+      <MyButton />
+    </div>
+  )
+}
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Chidi-creator/git-testing.git
+git push -u origin main
+
+
+
+const [count, setCount] = useState(null)
+
+    const clickHandler = () =>{
+      setCount(count + 1)
+      console.log(count)
+
+<button onClick={clickHandler}>Clicked Me {count} times</button>
+
+import React, { useState } from "react";
+
+const ItemList = () => {
+  const [items, setItems] = useState([]); // State variable to store the list of items
+  const [inputValue, setInputValue] = useState(""); // State variable to store the input value
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value); // Update the input value state variable
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setItems([...items, inputValue]); // Add the input value to the items array
+    setInputValue(""); // Clear the input value
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        <button type="submit">Add Item</button>
+      </form>
+
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ItemList;
+
+
+setItems(items.concat(inputValue));  is the same as setItems([...items, inputvalue]);
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Imperdiet massa tincidunt nunc pulvinar sapien et ligula. Tincidunt nunc pulvinar sapien et ligula. Ut ornare lectus sit amet est placerat. A cras semper auctor neque. Molestie at elementum eu facilisis sed odio morbi quis commodo. Metus vulputate eu scelerisque felis imperdiet proin. Platea dictumst quisque sagittis purus sit amet volutpat consequat mauris. Diam phasellus vestibulum lorem sed risus. Massa tempor nec feugiat nisl pretium fusce. Nec feugiat nisl pretium fusce. Consectetur adipiscing elit ut aliquam. Molestie at elementum eu facilisis sed odio. Facilisi nullam vehicula ipsum a arcu cursus vitae. Duis at consectetur lorem donec. Mauris in aliquam sem fringilla ut morbi.
+
+Est velit egestas dui id ornare arcu odio. Ut porttitor leo a diam sollicitudin tempor. Ipsum nunc aliquet bibendum enim. Nisl nisi scelerisque eu ultrices vitae auctor eu. Vitae et leo duis ut diam quam nulla porttitor massa. Nulla pharetra diam sit amet nisl suscipit. Diam maecenas ultricies mi eget mauris pharetra et. Et tortor at risus viverra adipiscing at in tellus integer.
+
+ 
+padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+}
+.the-contaier{
+display:flex;
+flex-wrap:wrap;
+justify-content: space-between;
+max-width: 760px;
+margin: 30px auto
+}
+divs wrapping the form control{
+width:calc(50%-10px)
+}
+
+.general{
+  display:flex;
+  justify-content: space-between;
+  max-width: 700px;
+  flex-wrap: wrap;
+  margin: 30px auto;
+ margin-left: 70px;
+}
+
+
+
+.general > div {
+  width: calc(50% - 10px); /* Adjust the width based on your spacing needs */
+  margin-bottom: 20px; /* Add margin-bottom for vertical spacing between form divs */
+}
+
+// Edit functioality jsx
+
+const handleEdit = (editedCredential) => {
+    setCredentials((prevCredentials) =>
+      prevCredentials.map((credential) =>{
+      if (credential.id === editedCredential.id) {
+        return editedCredential;
+      } else {
+        return credential;
+      }
+    }
+      )
+    );
+  };
+import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const EditCredential = ({ credentials, handleEdit }) => {
+  const { id } = useParams();
+
+  const [editedCredential, setEditedCredential] = useState({});
+
+  useEffect(() => {
+    const credential = credentials.find((credential) => credential.id === parseInt(id));
+    setEditedCredential(credential);
+  }, [id, credentials]);
+
+  const handleChange = (e) => {
+    setEditedCredential({
+      ...editedCredential,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSaveEdit = () => {
+    handleEdit(editedCredential);
+  };
+
+  return (
+    <div>
+      <h2>Edit Credential</h2>
+      <input
+        type="text"
+        name="firstName"
+        value={editedCredential.firstName}
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="lastName"
+        value={editedCredential.lastName }
+        onChange={handleChange}
+      />
+      {/* Render other editable fields */}
+      <button onClick={handleSaveEdit}>Save</button>
+      <Link to="/credentialPreview">Back to Credential Preview</Link>
+    </div>
+  );
+};
+
+export default EditCredential;
+
+
+ course,
+      grad,
+      grade,
+      former,
+      time,
+      role,
+      merits,
+
+University Attended:
+Course of Study:
+Date of graduation:
+CGPA:
+Experience
+Former Company:
+Time Spent in company:
+Position Applied For:
+Merits or award:
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  // Save tasks to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+.general {
+  display: flex;
+  justify-content: space-between;
+  max-width: 700px;
+  flex-wrap: wrap;
+  /* margin: 30px auto; */
+  padding: 50px;
+  background-color: whitesmoke;
+ 
+}
+.title {
+  position: absolute;
+  transform: translate(180px, -69px);
+}
+
+.general > div {
+  width: calc(50% - 50px); /* Adjust the width based on your spacing needs */
+  margin-bottom: 20px; /* Add margin-bottom for vertical spacing between form divs */
+
+}
+.education {
+  display: flex;
+  justify-content: space-between;
+  max-width: 700px;
+  flex-wrap: wrap;
+  /* margin: 30px auto; */
+  padding: 50px;
+  background-color: whitesmoke;
+  
+}
+
+.education > div {
+  width: calc(50% - 50px); /* Adjust the width based on your spacing needs */
+  margin-bottom: 20px; /* Add margin-bottom for vertical spacing between form divs */
+}
+.experience {
+  display: flex;
+  justify-content: space-between;
+  max-width: 700px;
+  flex-wrap: wrap;
+  /* margin: 30px auto; */
+  padding: 50px;
+  background-color: whitesmoke;
+
+}
+
+.experience > div {
+  width: calc(50% - 50px); /* Adjust the width based on your spacing needs */
+  margin-bottom: 20px; /* Add margin-bottom for vertical spacing between form divs */
+}
+
+input {
+  margin-top: 10px;
+  width: 200px;
+}
+.submit-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  transform: translate(300px);
+  margin-top: 10px;
+}
+
+/* Button hover effect */
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Button animation */
+.submit-button.loading {
+  pointer-events: none; /* Disable clicking during animation */
+}
+
+npm create vite@latest my-first-react-app -- --template react
+
+
+
+// typescript
+npm create vite@latest my-first-react-app -- --template react-ts
+
+
+  {picks.map((pick) => {
+        return (
+          <>
+          
+          {
+            picks && (
+              <div className="picked" key={pick.character.mal_id}>
+              <p>{pick.character.name}</p>
+            </div>
+            )
+          }
+          </>
+        );
+      })}
+
+  if (picks && picks.length > 0 && picks[0].character) {
+      console.log(picks[0].character);
+    }
+
+// json server
+npx json=server --watch filepath.json --port 6677
+
+        // img.id === image.id ? { ...image, alreadyClicked: true } : img
+
+// font awesome
+npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+
+//install react-router-dom
+npm install react-router-dom @6
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// react-router version 6
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+<Router>
+<Routes>
+<Route path = '#' element ={<Component />}
+</Routes>
+</Router>
+
+//div with image inside 
+
+.contents {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.pic {
+  height: 200px;
+  width: 200px;
+}
+.pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+rendering conditional components css//
+{
+position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cart-container{
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.cart-item{
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.cart-item :hover{
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+
+/* Styling for the modal overlay */
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the modal content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: px;
+  align-items: center;
+  background-color: #fefefe;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+{/* <div className={`menu-nav ${isOpen ? "show-options" : ""}`}>
+            <span className="nav-options">Electronics</span>
+            <span className="nav-options">Jewelry</span>
+            <span className="nav-options">Mens Clothing</span>
+            <span className="nav-options"> Women's Clothing</span> */}
+
+  <span className="nav-options">Electronics</span>
+            <span className="nav-options">Jewelry</span>
+            <span className="nav-options">Mens Clothing</span>
+  <span className="nav-options"> Women's Clothing</span>
+
+import React, { useRef } from "react";
+
+function App() {
+  const fRef = useRef(null);
+
+  const handleClick = (ev) => {
+    const f = fRef.current;
+    if (f) {
+      f.style.transform = `translateY(${ev.clientY - 25}px) translateX(${ev.clientX - 25}px)`;
+    }
+  };
+
+  return (
+    <div>
+      <div id="foo" ref={fRef}>
+        Click Me!
+      </div>
+      <button onClick={handleClick}>Move</button>
+    </div>
+  );
+}
+
+export default App;
+
+
+// tailwind restart react
+npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch
+
+// tailwind restart html
+npx tailwindcss -i style.css -o ./dist/output.css --watch
+
+npx tailwindcss init --full
+
+, { useNewUrlParser: true, useUnifiedTopology: true }
+
+//POST request
+const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+ 
+        const workout = { title, load, reps }- the useState vars
+      
+        const res = await fetch('http://localhost:4000/chidi/workouts', {
+          method: 'POST',
+          body: JSON.stringify(workout),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const json = await res.json();
+      
+        if (!res.ok) {
+          setError(json.error);
+        }
+        if (res.ok) {
+          setTitle('');
+          setReps('');
+          setLoad('');
+          setError(null);
+          console.log('new workout added', json);
+        }
+      };
+
+// using useEwducer to connect db and UI
+
+/* eslint-disable react/prop-types */
+import { createContext, useReducer } from "react";
+
+export const WorkoutContext = createContext()
+
+ const workoutsReducer = (state, action) =>{
+    switch(action.type){
+        case 'SET_WORKOUTS':
+            return {
+                workouts: action.payload
+            }
+            case 'CREATE_WORKOUT':
+                return {
+                    workouts: [action.payload, ...state.workouts]
+                }
+                default:
+                    return state
+    }
+
+}
+
+
+
+
+  export const WorkoutContextProvider = ({children}) =>{
+    const [state, dispatch] = useReducer(workoutsReducer, {
+        workouts: null
+    })
+    
+    return (
+        <WorkoutContext.Provider value={{...state, dispatch}}>
+            {children}
+        </WorkoutContext.Provider>
+    )
+}
+
+//custom hook
+import {WorkoutContext} from '../context/WorkoutContext'
+import { useContext } from 'react'
+
+export const useContextHook = () =>{
+    const context = useContext(WorkoutContext)
+
+    if(!context){
+        throw Error("Wrong context scope")
+    }
+
+    return context
+}
+
+// react context hook cheat sheet
+
+Define a Context:
+
+Create a context file that includes the state and a function to update the state.
+jsx
+
+// DataContext.js
+import React, { createContext, useState } from 'react';
+
+const DataContext = createContext();
+
+const DataProvider = ({ children }) => {
+  const [data, setData] = useState([]);
+
+  const addDataItem = (newItem) => {
+    setData((prevData) => [...prevData, newItem]);
+  };
+
+  return (
+    <DataContext.Provider value={{ data, addDataItem }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export { DataContext, DataProvider };
+Wrap Your App with the Provider:
+
+Wrap your main App component with the DataProvider to make the context available throughout your app.
+jsx
+
+// App.js
+import React from 'react';
+import { DataProvider } from './DataContext';
+import ComponentA from './ComponentA';
+
+const App = () => {
+  return (
+    <DataProvider>
+      <ComponentA />
+    </DataProvider>
+  );
+};
+
+export default App;
+Access Context in Another Component:
+
+In the component where you want to add to the array, use the useContext hook to access the context and the addDataItem function.
+jsx
+Copy code
+// ComponentB.js
+import React, { useContext } from 'react';
+import { DataContext } from './DataContext';
+
+const ComponentB = () => {
+  const { addDataItem } = useContext(DataContext);
+
+  const handleAddItem = () => {
+    const newItem = // your new data item;
+    addDataItem(newItem);
+  };
+
+  return (
+    <div>
+      <button onClick={handleAddItem}>Add Item</button>
+    </div>
+  );
+};
+
+export default ComponentB;
+Now, when you click the "Add Item" button in ComponentB, it will call the addDataItem function from the context, and the new item will be added to the array in the state in ComponentA. Adjust the code according to your specific use case.
+
+
+
+//usesignup hook
+import { useState } from "react";
+import { useAuthContext } from "./useAuthContext";
+
+
+const useSignup = () => {
+    const [error, setError] = useState(null)
+    const [isLoading, setIsLoading] = useState(null)
+    const {dispatch} = useAuthContext
+
+    const signup = async (email, password) =>{
+        setIsLoading(true)
+        setError(null)
+
+        const res =  await fetch('http://localhost:4000/chidi/user/signup/', {
+            method: 'POST', 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        })
+        const json = await res.json()
+
+        if(!res.ok){
+            setIsLoading(false)
+            setError(json.error)
+        }
+        if(res.ok){
+            // save the user to local storage
+            localStorage.setItem('user', JSON.stringify(json))
+
+            //update authcontext
+            dispatch({type: 'LOGIN', payload: json})
+
+            setIsLoading(false)
+
+        }
+    }
+    return {signup, error, isLoading}
+}
+
+ 
+export default useSignup;
+
