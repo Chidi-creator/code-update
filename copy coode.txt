@@ -1368,7 +1368,7 @@ const handleSubmit = async (e) => {
         }
       };
 
-// using useEwducer to connect db and UI
+// using useReducer to connect db and UI
 
 /* eslint-disable react/prop-types */
 import { createContext, useReducer } from "react";
@@ -1534,8 +1534,153 @@ const useSignup = () => {
     return {signup, error, isLoading}
 }
 
+
+// installing nodemon
+npm install --save-dev nodemon
+
  
 export default useSignup;
 
+// login hook
+login is almost similar to signup hook. Not much difference
 
-the names chidi
+//require auth middleware
+const jwt = require('jsonwebtoken')
+const User = require('../model/userModel')
+
+const requireAuth = async (req, res, next) =>{
+
+
+    //verify authentication
+    const { authorization } = req.headers
+
+    if(!authorization){
+        return res.status(401).json({error: 'Authorization token required'})
+    }
+
+    const token = authorization.split(' ')[1]
+
+    try{
+    const {_id} =  jwt.verify(token, process.env.SECRET)
+
+    req.user = await User.findOne({ _id }).select('_id')
+    next()
+    
+    }catch(error){
+        res.status(401).json({error: 'Request is not authorised'})
+    }
+}
+
+module.exports = requireAuth
+'
+//format for context api
+/* eslint-disable react/prop-types */
+import { createContext,useEffect,  useReducer } from "react";
+
+export const AuthContext = createContext()
+
+ const authReducer = (state, action) =>{
+    switch (action.type) {
+        case 'LOGIN' :
+            return {user : action.payload}
+
+            case 'LOGOUT':
+                return {user: null}
+                default: 
+                return state
+    }
+}
+
+
+const AuthContextProvider = ({children}) => {
+    const [state, dispatch] = useReducer(authReducer, {
+        user: null
+    })
+    useEffect(() =>{
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if(user){
+            dispatch({type: 'LOGIN', payload: user})
+        }
+    
+    }, [])
+    
+
+    
+    console.log('AuthContext state' , state)
+
+    return (
+        <AuthContext.Provider value={{...state, dispatch}}>
+            {children}
+        </AuthContext.Provider>
+    )
+}
+ 
+export default AuthContextProvider;
+
+then you wrap your main.jsx
+  <AuthContextProvider>
+    <WorkoutContextProvider>
+    <App />
+    </WorkoutContextProvider>
+    </AuthContextProvider>
+
+//then create a custom hook to be able to use it anywhere
+	import {AuthContext} from '../context/AuthContext'
+import { useContext } from 'react'
+
+export const useAuthContext = () =>{
+    const context = useContext(AuthContext)
+
+    if(!context){
+        throw Error("Wrong context scope")
+    }
+
+    return context
+}
+
+
+then applying it:
+import { useAuthContext } from "./useAuthContext";
+const {dispatch} = useAuthContext()
+
+			OR:
+import { useAuthContext } from "../hooks/useAuthContext";
+const { user } = useAuthContext()
+
+express security error:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+//connect to db
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+.then(() =>{
+
+//listen for requests
+app.listen(process.env.PORT, () =>{
+    console.log(`connected to db and listening on port ${process.env.PORT}`)
+})
+})
+.catch(err =>{
+    console.log(err)
+})
+//connecting to db method 2
+mongoose.connect(process.env.MONGO_URI)
+.then(() =>{
+    //listen for requests
+    app.listen(process.env.PORT, () =>{
+        console.log(`connected to db and running on port ${[process.env.PORT]}`)
+    })    
+})
+.catch(err =>{
+    console.log(err)
+})
+"mongodb+srv://tyler_igwe:CHinyere12*@cluster0.es3xjb8.mongodb.net/local_library?retryWrites=true&w=majority"
+
+//checking for id validity
+if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: "No such id"})
+
+    }
