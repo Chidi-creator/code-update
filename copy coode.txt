@@ -1684,3 +1684,17 @@ if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: "No such id"})
 
     }
+
+node is not a programming languagage it's a runtime
+
+events in node:
+exit
+calling it
+
+process.on('exit', () =>{
+
+
+})
+
+the module for reading file is ('fs)
+
