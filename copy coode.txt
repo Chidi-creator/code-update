@@ -1679,6 +1679,8 @@ mongoose.connect(process.env.MONGO_URI)
 })
 "mongodb+srv://tyler_igwe:CHinyere12*@cluster0.es3xjb8.mongodb.net/local_library?retryWrites=true&w=majority"
 
+Local Library represents name of db.
+
 //checking for id validity
 if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: "No such id"})
@@ -1697,4 +1699,8 @@ process.on('exit', () =>{
 })
 
 the module for reading file is ('fs)
+
+//working with view engines 'ejs'
+sending ejs files back you use app.render("index") 
+sending data back to the html fileapp.render("index", {text: "whatever"}) 
 
