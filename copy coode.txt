@@ -1704,3 +1704,60 @@ the module for reading file is ('fs)
 sending ejs files back you use app.render("index") 
 sending data back to the html fileapp.render("index", {text: "whatever"}) 
 
+
+//basic model Schema
+const mongoose = require("mongoose");
+
+const subscriberSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+
+  },
+  subscribedToChanel: {
+    type: String,
+    required: true
+  },
+  subscribeDate: {
+    type: Date,
+    required: true
+  }
+
+});
+
+module.exports = mongoose.model('subscriber', subscriberSchema)
+
+
+// common post request:
+
+router.post('/', async (req, res) =>{
+    const {name,  subscribedToChannel} = req.body
+
+    try{
+        const newSubscriber = await Subscriber.create({name, subscribedToChannel})
+        res.status(201).json({ message: "Subscriber created successfully", subscriber: newSubscriber });
+    }catch(err){
+        res.status(500).json({message: err.message})
+    }
+})
+
+
+// code to get id for any kini
+
+const getSubscriber = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const subscriber = await Subscriber.findById(id);
+      if (!subscriber) {
+        return res.status(404).json({ message: "Cannot find subscriber" });
+      }
+      res.subscriber = subscriber;
+      next();
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  };
+
+// for patching or updating user and stuff
+
+
