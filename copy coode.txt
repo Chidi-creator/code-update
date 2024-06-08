@@ -1706,26 +1706,22 @@ sending data back to the html fileapp.render("index", {text: "whatever"})
 
 
 //basic model Schema
-const mongoose = require("mongoose");
+const mongoose  = require('mongoose')
 
-const subscriberSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+const Schema = mongoose.Schema
 
-  },
-  subscribedToChanel: {
-    type: String,
-    required: true
-  },
-  subscribeDate: {
-    type: Date,
-    required: true
-  }
+const employeeSchema = new Schema({
+    firstname:{
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    }
+})
 
-});
-
-module.exports = mongoose.model('subscriber', subscriberSchema)
+module.exports = mongoose.model('Employee', employeeSchema)
 
 
 // common post request:
@@ -1895,3 +1891,219 @@ const handleLogOut = async (req, res) => {
   });
   res.sendStatus(204);
 };
+
+//higher order function, roles P
+const verifyRoles = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!req?.roles) return res.sendStatus(401);
+    const rolesArray = [...allowedRoles];
+    console.log(rolesArray);
+    console.log(req.roles);
+    const result = req.roles
+      .map((role) => rolesArray.includes(role))
+      .find((val) => val === true);
+    if (!result) return res.sendStatus();
+    next();
+  };
+};
+
+module.exports = {verifyRoles}
+
+//check what happens when it connect once
+mongoose.connection.once('open', () =>{
+  app.listen(PORT, () => {
+    console.log(`server is connected to DB and running on ${PORT}`);
+  });
+
+const mongoose = require('mongoose')
+
+const connectDB = async () =>{
+    try{
+
+        await mongoose.connect(process.env.DATABASE_URI)
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
+module.exports = {connectDB}
+
+standard for naming models is starting them with capital letter  
+
+//short hand for type: number
+Editor: Number,
+        Admin: Number,
+
+
+//to findone in the db
+  const duplicate = await User.findOne({username: user}).exec()
+
+//editing and saving changes in mongoDB
+ const foundUser =  await User.findOne({refreshToken}).exec()
+  if (!foundUser) {
+    res.clearCookie("jwt", { httpOnly: true });
+    return res.sendStatus(204);
+  }
+  //Delete refreshToken in db
+ foundUser.refreshToken = ''
+
+ const result = await foundUser.save()
+
+function to check validity of id//
+const mongoose = require('mongoose');
+
+const checkId = (id) => {
+  return mongoose.Types.ObjectId.isValid(id);
+};
+
+module.exports = { checkId };
+
+using it: if (!checkId(id)) return your error
+
+
+// Define the Course schema
+const courseSchema = new Schema({
+  coursename: { type: String, required: true },
+  thumbnail: { type: String, required: true },
+  genre: { type: String, required: true }  // Typically lowercase field names are preferred
+});
+
+// Define the EnrolledCourse schema
+const enrolledCourseSchema = new Schema({
+  courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+});
+
+// Create models from the schemas
+const Course = mongoose.model('Course', courseSchema);
+const EnrolledCourse = mongoose.model('EnrolledCourse', enrolledCourseSchema);
+
+//populating based on the ref 
+const EnrolledCourse = require('../models/EnrolledCourse');
+const Course = require('../models/Course');
+const User = require('../models/User');
+
+const enrollInCourse = async (req, res) => {
+  const { courseId } = req.params;
+  const { userId } = req.body;
+
+  try {
+    // Check if the course exists
+    const course = await Course.findById(courseId);
+    if (!course) return res.status(404).json({ message: 'Course not found' });
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Create a new enrollment
+    const newEnrollment = new EnrolledCourse({ courseId, userId });
+    await newEnrollment.save();
+
+    res.status(201).json(newEnrollment);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const getEnrolledCourses = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const enrolledCourses = await EnrolledCourse.find({ userId })
+      .populate('courseId')  // Populate with Course details
+      .populate('userId');   // Populate with User details
+
+    res.status(200).json(enrolledCourses);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { enrollInCourse, getEnrolledCourses };
+
+const mongoose = require('mongoose');
+const EnrolledCourse = require('./models/EnrolledCourse'); // Adjust the path as necessary
+const Course = require('./models/Course'); // Adjust the path as necessary
+
+const getEnrolledCourses = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const enrolledCourses = await EnrolledCourse.find({ userId })
+      .populate({
+        path: 'courseId',
+        select: 'coursename thumbnail' // Select only the coursename and thumbnail fields
+      });
+
+    // If you want to return only the course details without the rest of the enrolledCourses structure
+    const courses = enrolledCourses.map(ec => ({
+      coursename: ec.courseId.coursename,
+      thumbnail: ec.courseId.thumbnail
+    }));
+
+    res.status(200).json(courses);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = { getEnrolledCourses };
+
+
+
+
+
+
+
+//mapping as objects
+
+  const check = data.map(cr => ({
+  coursename:  cr.courseId.coursename,
+  thumbnail: cr.courseId.thumbnail
+
+}))
+
+regex for password: 
+^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$
+
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
+
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+adding multiple values to a field:
+const CourseEnroll = mongoose.model('CourseEnroll', CourseEnrollSchema);
+
+// Find the existing CourseEnroll document for the user
+let courseEnroll = await CourseEnroll.findOne({ userId: userIdToAdd });
+
+if (courseEnroll) {
+  // User already has a CourseEnroll document, so add the new course
+  courseEnroll.enrolledCourses.push(newCourseId);
+  await courseEnroll.save();
+} else {
+  // Create a new CourseEnroll document for the user
+  courseEnroll = await CourseEnroll.create({
+    userId: userIdToAdd,
+    enrolledCourses: [newCourseId]
+  });
+}
+
+
+testing if regex matches
+ const result = USER_REGEX.test(user)
+
+using axios//
+-first you install axios.
+-create a folder called api
+-create a file in the api folder called "axios.js"
+then in the axios file input this code:
+- import axios from "axios";
+
+export default axios.create({
+    baseURL: 'http://localhost:3500' // your api in your backend
+})
