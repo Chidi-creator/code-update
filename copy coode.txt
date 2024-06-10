@@ -2107,3 +2107,249 @@ then in the axios file input this code:
 export default axios.create({
     baseURL: 'http://localhost:3500' // your api in your backend
 })
+
+
+import axios from "./api/axios"; // to bring the axios from the other file
+
+// now to send response to the server 
+// const REGISTER_URL = '/register'
+
+
+  try {
+      const response = await axios.post(REGISTER_URL, JSON.stringify({user, pwd}),
+    {
+      headers: {'Content-Type': 'application/json'},
+      withCredentials: true
+    })
+    console.log(response.data)
+    console.log(response.accessToken)
+    console.log(JSON.stringify(response))
+    setSuccess(true)
+    //clear input field
+
+    } catch (err) {
+        if(!err?.response){
+          setErrMsg('NO SERVER RESPONSE')
+        } else if (err.response?.status){
+            setErrMsg('Username Taken')
+        } else {
+          setErrMsg('Registration Failed')
+        }
+        errRef.current.focus()
+    }
+
+for the cors workings//
+
+an allowed list of sites:
+
+const allowedOrigins = [
+    'https://www.yoursite.com',
+    'http://127.0.0.1:5500',
+    'http://localhost:3500',
+    'http://localhost:5173'
+
+
+]
+module.exports = allowedOrigins
+
+then the options
+
+const credentials = require('../middleware/credentials')
+const allowedOrigins = require('./allowedOrigins')
+
+const corsOptions = {
+    origin: (origin, callback) =>{
+        if (allowedOrigins.indexOf(origin) != -1 || !origin){
+            callback(null, true)
+
+        }else{
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+
+module.exports = corsOptions
+
+then in the base server you put the middleware;
+app.use(cors(corsoptions))
+
+//using authContext properly
+
+-firstly we created a folder called context
+-then we created a file in the ontext folder called AuthProvider(it can be anything relating to your global variable)
+-then we inputed the code to help decclare the global variables that we would be putting through out the components:
+import { createContext, useState } from "react";
+
+
+const AuthContext = createContext({});
+
+export const AuthProvider = ({ children }) => {
+
+    //the global variables
+  const [auth, setAuth] = useState();
+
+  return (
+    <AuthContext.Provider value={{ auth, setAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+
+export default AuthContext
+
+
+
+-//then after that we went to the main jsx file to wrap the whole app in the contextprovider:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { AuthProvider } from "./context/AuthProvider.jsx";
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>
+);
+
+then we went to the file we needed the global variable;
+firstly we imported useContext from react
+- import { useRef, useState, useEffect, useContext } from "react";
+
+-then we imported the authContext 
+import AuthContext from "./context/AuthProvider";
+then we imported the setAuth function from the context provider
+
+const {setAuth} = useContext(AuthContext)
+
+
+we wanted to make the using the global state easier so we creted a cutom hook
+import { useContext } from "react";
+
+import AuthContext from "../context/AuthProvider";
+
+const useAuth = () =>{
+    return useContext(AuthContext)
+}
+
+export default useAuth
+
+ let isMounted = true
+    const controller = new AbortController()
+
+// for handling get methods when stuff has unmounted
+we used an abortController accepted by axios:
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axios.get("/users", {
+          signal: controller.signal,
+        });
+        console.log(response?.data);
+        isMounted && setUsers(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUsers();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
+
+use refresh token hook:
+import axios from "../api/axios";
+import useAuth from "./useAuth";
+
+const useRefreshToken = () => {
+const {setAuth} = useAuth()
+
+const refresh = async () =>{
+    const response = await axios.get('/refresh', {
+        withCredentials: true
+    })
+    setAuth(prev => {
+        console.log(JSON.stringify(prev))
+        console.log(response?.data?.accessToken)
+        return{...prev, accessToken: response.data.accessToken}
+    })
+
+    return response.data.accessToken
+}
+
+    return refresh
+}
+ 
+export default useRefreshToken;
+
+the standard interceptor custom hook for when your token has expired and you want to send a token to the server:
+
+import { axiosPrivate } from "../api/axios";
+import { useEffect } from "react";
+import useRefreshToken from "./useRefreshToken";
+import useAuth from "./useAuth";
+
+
+const useAxiosPrivate = () =>{
+    const refresh = useRefreshToken()
+    const {auth} = useAuth()
+
+useEffect(() => {
+
+    const requestIntercept = axiosPrivate.interceptors.request.use(
+        config =>{
+            if(!config.headers['Authorization']) {
+                config.headers['Authorization'] = `Bearer ${auth?.accessToken}`
+            }
+            return config
+
+        }, (error) => Promise.reject(error)
+    )
+
+
+    const responseIntercept = axiosPrivate.interceptors.response.use(
+        response => response,
+        async (error) =>{
+            const prevRequest = error?.config;
+            if(error?.response?.status === 403 && !prevRequest?.sent ){
+                prevRequest.sent = true
+                const newAccessToken = await refresh()
+                prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
+                return axiosPrivate(prevRequest)
+            }
+            return Promise.reject(error)
+        }
+
+    )
+
+return () =>{
+    axiosPrivate.interceptors.request.eject(requestIntercept)
+    axiosPrivate.interceptors.response.eject(responseIntercept)
+}
+
+}, [auth, refresh]);
+
+
+
+
+    return axiosPrivate
+ }
+
+ export default useAxiosPrivate
+
+
+
+
+
