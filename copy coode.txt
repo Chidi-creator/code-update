@@ -1181,6 +1181,8 @@ npm create vite@latest my-first-react-app -- --template react
 
 
 
+
+
 // typescript
 npm create vite@latest my-first-react-app -- --template react-ts
 
@@ -2319,37 +2321,176 @@ useEffect(() => {
     )
 
 
-    const responseIntercept = axiosPrivate.interceptors.response.use(
-        response => response,
-        async (error) =>{
-            const prevRequest = error?.config;
-            if(error?.response?.status === 403 && !prevRequest?.sent ){
-                prevRequest.sent = true
-                const newAccessToken = await refresh()
-                prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-                return axiosPrivate(prevRequest)
+now using it to perform a request:
+import { useState, useEffect } from "react";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
+
+const Users = () => {
+    const [users, setUsers] = useState();
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        let isMounted = true;
+        const controller = new AbortController();
+
+        const getUsers = async () => {
+            try {
+                const response = await axiosPrivate.get('/users', {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                isMounted && setUsers(response.data);
+            } catch (err) {
+                console.error(err);
+                if (err?.response?.status === 403) navigate('/login', { state: {from: location }, replace: true });
+                
             }
-            return Promise.reject(error)
         }
 
-    )
+        getUsers();
 
-return () =>{
-    axiosPrivate.interceptors.request.eject(requestIntercept)
-    axiosPrivate.interceptors.response.eject(responseIntercept)
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, [])
+
+    return (
+        <article>
+            <h2>Users List</h2>
+            {users?.length
+                ? (
+                    <ul>
+                        {users.map((user, i) => <li key={i}>{user?.username}</li>)}
+                    </ul>
+                ) : <p>No users to display</p>
+            }
+        </article>
+    );
+};
+
+export default Users;
+
+using multer 
+on the front end 
+ const [title, setTitle] = useState("");
+  const [file, setFile] = useState("");
+
+  const submitImage = async (e) =>{
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append("title", title);
+    formData.append("file", file);
+    console.log(title, file);
+  }
+
+   <form className="formStyle" onSubmit={submitImage}>
+        <h4>Uplpad Pdf in React</h4>
+        <br />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Title"
+          required
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <br />
+        <input
+          type="file"
+          className="form-control"
+          accept="application/pdf"
+          required
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <br />
+        <br />
+        <button class="btn btn-primary" type="submit">
+          Submit
+        </button>
+      </form>
+
+then in the backend you first install multer 
+npm i multer 
+
+then:
+const multer  = require('multer')
+const upload = multer({ dest: './files' })
+
+or this
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './files')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() 
+    cb(null,  uniqueSuffix+file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
+
+app.post('/upload-files', upload.single("file"), async  (req, res) =>{ //the file is referring to the key and value file p from the formData() object
+  console.log(req.file)
+const title = req.body.title
+const filename = req.file.filename
+try{
+await pdfSchema = await pdfDetails.create({title, pdf: filename})
+
+})
+
+
+now on the front end to upload files
+do the normal axios
+axios.js:
+import 'axios' from 'axios'
+BASE_URL: '/YOUR-API'
+
+export deafult const axios.create({
+  baseURL: BASE_URL, })
+
+then in the file function
+try{
+      const response = await axios.post(FILE_ROUTE, formData, {
+        headers: {"Content-Type": "multipart/form-data"}
+    } )
+    console.log(response.data)
+    }catch(err){
+      console.log(err.message)
+    }
+  }
+
+
+
+
+
+
+const courseId = "your_course_id_here"; // Replace with the actual courseId you want to check
+
+async function getEnrolledUserIds(courseId) {
+  try {
+    const result = await CourseEnrollSchema.find(
+      { enrolledCourses: { $in: [courseId] } },
+      { userId: 1, _id: 0 }
+    )
+    .populate("userId", "name email");
+
+    const users = result.map((doc) => doc.userId);
+    return users;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
-}, [auth, refresh]);
-
-
-
-
-    return axiosPrivate
- }
-
- export default useAxiosPrivate
-
-
-
-
-
+getEnrolledUserIds(courseId)
+  .then((users) => {
+    console.log(users);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
