@@ -1183,6 +1183,7 @@ npm create vite@latest my-first-react-app -- --template react
 
 
 
+
 // typescript
 npm create vite@latest my-first-react-app -- --template react-ts
 
@@ -2494,3 +2495,10 @@ getEnrolledUserIds(courseId)
   .catch((error) => {
     console.error(error);
   });
+
+this is done in the root location of the fullstack app,
+"scripts": {
+    "backend": "nodemon server/index.js",
+    "frontend": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  }
