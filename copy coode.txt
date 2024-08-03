@@ -2504,7 +2504,6 @@ this is done in the root location of the fullstack app,
   }
 
 //error codes
-
 Status code	Meaning
 1xx Informational	 
 100	Continue
@@ -2578,3 +2577,34 @@ Status code	Meaning
 508	Loop Detected
 510	Not Extended
 511	Network Authentication Required
+
+// using bcrypt: don't know why i didn't do this sooner 
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+//creating token function: we put it in a util folder and called it after we created a new user
+const jwt = require('jsonwebtoken')
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
+
+
+
+
+
+const generateToken = (res, userId) =>{
+    const token = jwt.sign({userId}, process.env.JWT_SECRET,{
+        expiresIn: '30d'
+    })
+    //set JWT as HTTP-only cookie
+    res.cookie('jwt', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV != 'development',
+        sameSite: "strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000 
+    })
+
+    return token
+}
+
+module.exports = generateToken 
+      
