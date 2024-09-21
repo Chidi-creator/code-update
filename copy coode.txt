@@ -2503,7 +2503,7 @@ this is done in the root location of the fullstack app,
     "dev": "concurrently \"npm run client\" \"npm run server\""
   }
 
-//error codes
+//error 
 Status code	Meaning
 1xx Informational	 
 100	Continue
@@ -2730,3 +2730,82 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
+
+automatic redirection
+const navigate = useNavigate()
+const {search} = useLocation()
+const sp = new URLSearchParams(search)
+const redirect = sp.get('redirect') || '/'
+
+
+useEffect(() => {
+    if (userInfo) {
+        navigate(redirect)
+    }
+}, [navigate, redirect]);
+
+
+persistentMap saves the entire entity as sepetate entitites in the local storage
+
+
+proper use of persistentAtom:
+import { persistentAtom } from '@nanostores/persistent';
+
+// Persistent object for user info
+export const userStore = persistentAtom('userInfo', {}, {
+  encode: JSON.stringify,
+  decode: JSON.parse,
+});
+
+// Persistent array for items
+export const itemsStore = persistentAtom('items', [], {
+  encode: JSON.stringify,
+  decode: JSON.parse,
+});
+
+// Persistent single value for a boolean
+export const isDarkMode = persistentAtom('darkMode', false, {
+  encode: String,
+  decode: (value) => value === 'true',
+});
+
+import { useStore } from '@nanostores/react';
+import { userStore, itemsStore, isDarkMode } from '../stores/userStores';
+
+const MyComponent = () => {
+  const userInfo = useStore(userStore);
+  const items = useStore(itemsStore);
+  const darkMode = useStore(isDarkMode);
+
+  const toggleDarkMode = () => isDarkMode.set(!darkMode);
+  const addItem = (item) => itemsStore.set([...items, item]);
+
+  return (
+    <div>
+      <p>User: {userInfo.username}</p>
+      <button onClick={toggleDarkMode}>
+        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+      <button onClick={() => addItem('New Item')}>Add Item</button>
+    </div>
+  );
+};
+
+export default MyComponent;
+
+//editing array;
+ const editArray = (updatedUsername, updatedEmail, id) =>{
+
+    const updatedUsers = users.map(user => 
+        user._id === id 
+          ? { ...user, username: updatedUsername, email: updatedEmail } 
+          : user
+      );
+      
+ 
+
