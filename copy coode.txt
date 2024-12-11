@@ -2870,3 +2870,58 @@ try {
   res.status(500).json({messae: error.message})
 }
 }
+
+1. ISO 8601 Format (Recommended)
+The ISO 8601 format is:
+
+json
+Copy code
+YYYY-MM-DDTHH:mm:ss.sssZ
+Example:
+For November 25, 2024, at 10:00 AM UTC:
+
+json
+Copy code
+2024-11-25T10:00:00.000Z
+Postman Input:
+If your API expects a date field, provide it in the body like this:
+
+json
+Copy code
+{
+    "startTime": "2024-11-25T10:00:00.000Z"
+}
+
+
+const leaveSession = async (req, res) => {
+  try {
+    const { sessionid } = req.params;
+    const userid = req.user._id;
+
+    // Find the session and remove the user from members
+    const session = await Session.findByIdAndUpdate(
+      sessionid,
+      { 
+        $pull: { members: userid }, // Remove the specific user ID from members
+        $set: { isFull: false } // Reset isFull if it was true
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    // Update the user's current session and return the updated user
+    const updatedUser = await User.findByIdAndUpdate(
+      userid, 
+      { currentSession: null },
+      { new: true } // Return the updated user document
+    );
+
+    res.status(200).json({ session, user: updatedUser });
+  } catch (err) {
+    console.error("Error in leaveSession:", err);
+    res.status(500).json({ message: err.message });
+  }
+};
