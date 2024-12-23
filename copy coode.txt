@@ -2925,3 +2925,192 @@ const leaveSession = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+    await Promise.all(
+      members.map(async (memberId) => {
+        const user = await User.findById(memberId);
+        if (user) {
+          user.currentSession = null;
+          user.isCaptain = false;
+          await user.save();
+        }
+      })
+    );
+
+
+const createAndAllocateSet = async (req, res) => {
+  try {
+    const { sessionid } = req.params;
+
+    const setName = [
+      "Team 7", "Royal Knights", "Bouillon Fc", "Sepulcher FC", "Akatsuki", "Amapiano FC", 
+      "Grey Fc", "Dynasty", "Elon Musk Fc", "J-boys FC", "Sporty9ja", "Wizkidfc", "30BG", 
+      "Valdomites", "OV-Hoes", "Outsiders", "Celeboys", "Azonto FC", "Akara warriors", "Egusi FC"
+    ];
+
+    // Fetch session
+    const session = await Session.findById(sessionid);
+    const { setNumber } = session;
+    console.log(`Creating ${setNumber} teams for session: ${sessionid}`);
+
+    // Fetch existing sets for this session to track used names
+    const existingSets = await Set.find({ session: session._id });
+
+    // Get the names already used in this session
+    const usedNames = existingSets.map(set => set.name);
+
+    // Initialize available names list, excluding used names
+    const availableNames = setName.filter(name => !usedNames.includes(name));
+
+    // Check if there are enough unique names available
+    if (availableNames.length < setNumber) {
+      return res.status(400).json({ message: "Not enough unique names available for the session" });
+    }
+
+    const setData = [];
+
+    // Generate sets with unique names for the session
+    for (let i = 1; i <= setNumber; i++) {
+      // Select a random name from the available names
+      const randomIndex = Math.floor(Math.random() * availableNames.length);
+      const randomName = availableNames.splice(randomIndex, 1)[0]; // Remove the selected name
+
+      setData.push({
+        session: session._id,
+        name: randomName,
+        players: []
+      });
+    }
+
+    // Insert the sets into the database
+    const createdSets = await Set.insertMany(setData);
+
+    res.status(201).json(createdSets);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+    console.log(err);
+  }
+};
+
+
+
+flatMap() => reduces an array to one level
+
+const allocateMembers = async (session, createdSets) => {
+  const members = session.members;
+
+  const pickedMembers = createdSets.players.flatMap((player) => player);
+
+  const availablePlayers = members.filter(
+    (member) => !pickedMembers.includes(member)
+  );
+
+
+  for (i = 0; i < members.length; i++) {
+    const player = availablePlayers.shift();
+
+    const setIndex =  i % createdSets.length;
+    const pickedSet = createdSets[setIndex];
+
+    pickedSet.players.push(player);
+    await pickedSet.save()
+  }
+};
+
+const createSet = async (req, res) => {
+  try {
+    const { sessionid } = req.params;
+
+    const setName = [
+      "Team 7",
+      "Royal Knights",
+      "Bouillon Fc",
+      "Sepulcher FC",
+      "Akatsuki",
+      "Amapiano FC",
+      "Grey Fc",
+      "Dynasty",
+      "Elon Musk Fc",
+      "J-boys FC",
+      "Sporty9ja",
+      "Wizkidfc",
+      "30BG",
+      "Valdomites",
+      "OV-Hoes",
+      "Outsiders",
+      "Celeboys",
+      "Azonto FC",
+      "Akara warriors",
+      "Egusi FC",
+    ];
+
+    const session = await Session.findById(sessionid);
+    const { setNumber } = session;
+
+
+    if (!session) return res.status(409).json({ message: "Session not found" });
+
+    const existingSets = await Set.find({ session: sessionid });
+
+    const usedNames = existingSets.map((set) => set.name);
+
+    const availableNames = setName.filter((name) => !usedNames.includes(name));
+
+    // Check if there are enough unique names available
+    if (availableNames.length < setNumber) {
+      return res
+        .status(400)
+        .json({ message: "Not enough unique names available for the session" });
+    }
+
+    const setData = [];
+
+    for (i = 0; i < setNumber; i++) {
+      const randomIndex = Math.floor(Math.random() * availableNames.length);
+      const randomName = availableNames[randomIndex];
+
+      setData.push({
+        session: session._id,
+        name: randomName,
+        players: [],
+      });
+
+      availableNames.splice(randomIndex, 1);
+    }
+
+    const createdSets = await Set.insertMany(setData);
+
+    await allocateMembers(session, createdSets)
+
+    res.status(201).json({ messae: "sets created Sucessfully" }, createdSets);
+  } catch (err) {
+    res.status(500).json({ message: "Internal server error" });
+    console.log(err);
+  }
+};
+
+//proper way of connecting DB
+
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const connDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = connDB;
+
+
+//server file
+
+connDB()
+
+mongoose.connection.once("open", () => {
+  app.listen(PORT, () => {
+    console.log(`server running on port ${PORT} and connected to database`);
+  });
+});
