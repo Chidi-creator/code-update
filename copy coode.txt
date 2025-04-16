@@ -1,4 +1,4 @@
-let winCounter = 0;
+Flet winCounter = 0;
 let loseCounter = 0;
 let drawCounter = 0;
 
@@ -3114,3 +3114,503 @@ mongoose.connection.once("open", () => {
     console.log(`server running on port ${PORT} and connected to database`);
   });
 });
+
+
+//mongoDB query operators
+$eq: Matches values that are equal to a specified value.
+$gt: Matches values that are greater than a specified value.
+$gte: Matches values that are greater than or equal to a specified value.
+$lt: Matches values that are less than a specified value.
+$lte: Matches values that are less than or equal to a specified value.
+$ne: Matches values that are not equal to a specified value.
+$in: Matches any of the values specified in an array.
+$nin: Matches none of the values specified in an array.
+
+  for (let i = 0; i < members.length; i++) {
+    const player = availablePlayers[i];
+
+    const setIndex = i % createdSets.length;
+    const pickedSet = createdSets[setIndex];
+
+    pickedSet.players.push(player);
+    await pickedSet.save();
+  }
+
+   while (availablesets.length > 0) {
+      const randomIndex1 = Math.floor(Math.random() * availablesets.length);
+      const randomTeam1 = availablesets[randomIndex1];
+      availablesets.splice(randomIndex1, 1);
+
+      const randomIndex2 = Math.floor(Math.random() * availablesets.length);
+      const randomTeam2 = availablesets[randomIndex2];
+      availablesets.splice(randomIndex2, 1);
+
+
+      matchUp.push({
+        teamOne: randomTeam1,
+        teamTwo: randomTeam2,
+        session: sessionid,
+      });
+    }
+
+import React from "react";
+
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Routers from "../routers/Routers";
+
+const Layout = () => {
+  return (
+    <>
+      <Header />
+      <main>
+        <Routers />
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+export default Layout;
+
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+
+
+git fetch upstream
+git checkout main  # Ensure you're on main
+git merge upstream/main
+git checkout <your-branch>
+git merge upstream/main
+git add .
+git commit -m "Resolved merge conflicts"
+git push origin main
+
+
+app.post('/webhook', (req, res) => {
+    const payload = req.body;
+    if (payload.event === 'charge.completed' && payload.data.status === 'successful') {
+        // Extract the necessary data
+        const { customer, amount, currency, transaction_id } = payload.data;
+
+        // Generate PDF and Send Email
+        generateAndSendPDF(customer.email, amount, currency, transaction_id);
+    }
+    res.sendStatus(200);
+});
+
+
+npm install pdf-lib
+
+const { PDFDocument, rgb } = require('pdf-lib');
+const fs = require('fs');
+
+async function generatePDF(customerEmail, amount, currency, transactionId) {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([600, 400]);
+    const { width, height } = page.getSize();
+
+    page.drawText('Payment Receipt', { x: 200, y: 350, size: 24, color: rgb(0, 0.53, 0.71) });
+    page.drawText(`Customer: ${customerEmail}`, { x: 50, y: 300, size: 14 });
+    page.drawText(`Amount Paid: ${amount} ${currency}`, { x: 50, y: 270, size: 14 });
+    page.drawText(`Transaction ID: ${transactionId}`, { x: 50, y: 240, size: 14 });
+    page.drawText('Thank you for your payment!', { x: 50, y: 210, size: 14 });
+
+    const pdfBytes = await pdfDoc.save();
+    fs.writeFileSync('receipt.pdf', pdfBytes);
+
+    return pdfBytes; // Return the generated PDF bytes for emailing
+}
+
+
+npm install nodemailer
+
+const nodemailer = require('nodemailer');
+
+async function sendEmailWithPDF(email, pdfBytes) {
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'your-email@gmail.com',
+            pass: 'your-password'
+        }
+    });
+
+    const mailOptions = {
+        from: 'your-email@gmail.com',
+        to: email,
+        subject: 'Your Payment Receipt',
+        text: 'Attached is your payment receipt.',
+        attachments: [
+            {
+                filename: 'receipt.pdf',
+                content: pdfBytes,
+                contentType: 'application/pdf'
+            }
+        ]
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
+}
+
+async function generateAndSendPDF(email, amount, currency, transactionId) {
+    try {
+        const pdfBytes = await generatePDF(email, amount, currency, transactionId);
+        await sendEmailWithPDF(email, pdfBytes);
+    } catch (err) {
+        console.error('Error generating or sending PDF:', err);
+    }
+}
+
+//typescript section 
+
+npm i express @types/express
+npm i nodemon
+npm i mongoose
+npm i @types/mongoose
+npm i typescript ts-node
+
+ "scripts": {
+    "start": "nodemon"
+  },
+
+//tsconfig.json file
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "lib": ["ES6"],
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": ["src/**/*"]
+}
+
+
+//nodemon.json (should be in the root folder)
+{
+    "watch": [
+        "src"
+    ],
+    "ext": ".ts,.js",
+    "exec": "ts-node ./src/index.ts"
+}
+
+
+
+
+//learning swagger
+npm i swagger-ui-express yamljs
+
+//format for swagger.yaml
+openapi: 3.0.0
+info: 
+  title: Sample API
+  description: API documentation Example
+  version: 1.0.0
+paths: 
+  /:
+    get:
+      summary: Returns a greeting
+      responses:
+        200:
+          description: greeting response
+          content:
+            application/json:
+              schema: 
+                type: string
+                example: Hello World
+
+
+//server look:
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+const swaggerDocument = YAML.load("./swagger.yaml");
+import { Request, Response } from "express";
+const app = express();
+const port = 3000;
+app.use(express.json());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello World");
+});
+
+app.listen(port, () => {
+  console.log("server runnning");
+});
+
+
+//express-js-doc-swagger
+npm i express-jsdoc-swaggers
+
+const options = {
+    info: {
+        version: "1.0.0",
+        title: "items API",
+        desscription: "A Simple API to manage list of items"
+    },
+    baseDir: __dirname,
+    filesPattern: "./*.ts"
+}
+
+expressJSDocSwagger(app)(options)
+
+//standard documentation for get
+/**
+ * GET /
+ * @summary Get all items
+ * @description Returns list of all items
+ * @response 200 - A list of items - application/json
+ * @responseBody {User[]}
+ */
+
+      // "^.+\\.(js|jsx)$": "babel-jest"  
+
+
+
+//testing p
+import request from 'supertest';
+import middleware from '../../middleware/index';
+import { authService } from '../../services/authService';
+import { userUsecase } from '../../usecases/userUsecase';
+import { notificationService } from '../../services/notificationService';
+import { responseManager } from '../../utils/responseManager';
+
+// Mock dependencies to prevent database interaction
+jest.mock('../../services/authService');
+jest.mock('../../usecases/userUsecase');
+jest.mock('../../services/notificationService');
+jest.mock('../../utils/responseManager');
+
+describe("Authentication - Login", () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("should return error if email is missing", async () => {
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ otp: "123456" });
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Missing required fields: email");
+    });
+
+    it("should return error if email format is invalid", async () => {
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "invalid-email", otp: "123456" });
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Invalid email address");
+    });
+
+    it("should send OTP if OTP is not provided", async () => {
+        (authService.validateOTPOnAccess as jest.Mock).mockResolvedValue({ success: true });
+
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "test@example.com" });
+
+        expect(authService.validateOTPOnAccess).toHaveBeenCalledWith({
+            type: "EMAIL",
+            email: "test@example.com",
+        });
+
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe("OTP sent");
+    });
+
+    it("should return error if OTP is incorrect", async () => {
+        (authService.loginUser as jest.Mock).mockRejectedValue(new Error("Invalid OTP"));
+
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "test@example.com", otp: "wrongOTP" });
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Invalid OTP");
+    });
+
+    it("should login successfully with correct OTP", async () => {
+        (authService.loginUser as jest.Mock).mockResolvedValue({
+            userId: "12345",
+            token: "mocked-jwt-token",
+        });
+
+        (responseManager.success as jest.Mock).mockImplementation((res, data, message) => {
+            res.status(200).json({ success: true, message, data });
+        });
+
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "test@example.com", otp: "123456" });
+
+        expect(authService.loginUser).toHaveBeenCalledWith({
+            otp: "123456",
+            email: "test@example.com",
+            ip: expect.any(String),
+        });
+
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe("Login successful");
+        expect(response.body.data.token).toBe("mocked-jwt-token");
+    });
+
+    it("should return 2FA required if the user has 2FA enabled", async () => {
+        (authService.loginUser as jest.Mock).mockResolvedValue({
+            userId: "12345",
+            partialToken: "mocked-partial-token",
+            twoFA: true,
+        });
+
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "2fauser@example.com", otp: "123456" });
+
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe("2FA Required");
+        expect(response.body.data.partialToken).toBe("mocked-partial-token");
+    });
+
+    it("should return an error if database operation fails", async () => {
+        (authService.loginUser as jest.Mock).mockRejectedValue(new Error("Database operation failed"));
+
+        const response = await request(middleware.getApp())
+            .post('/auth/login')
+            .send({ email: "error@example.com", otp: "123456" });
+
+        expect(response.status).toBe(500);
+        expect(response.body.message).toBe("Database operation failed");
+    });
+});
+
+
+//nest begginings
+
+install globally 
+npm i -g @nestjs/cli
+
+start new project
+nest new projectname
+
+creating modules
+nest generate module module-name
+
+creating controllers for modules
+nest generate controller module-name
+
+adding validation pipes
+npm install class-validator class-transformer
+
+  app.useGlobalPipes(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true}))
+	 create(@Body(ValidationPipe) input: CreateEpisodeDto)
+
+
+//generating guards
+nest generate guard <path>/<name>
+
+using mongose with nestjs
+npm i @nestjs/mongoose mongoose
+
+//registering mongoose for the app in the app module:
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
+
+@Module({
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost:27017/nest'),
+    UsersModule
+  ],
+  controllers: [],
+  providers: [],
+})
+export class AppModule {}
+
+
+schema creation
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
+import { UserSettings } from './UserSettings.schema';
+
+@Schema()
+export class User {
+  @Prop({ unique: true, required: true })
+  username: string;
+
+  @Prop({ required: false })
+  displayName?: string;
+
+  @Prop({ required: false })
+  avatarUrl?: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => UserSettings })
+  setting?: UserSettings;
+}
+
+const UserSchema = SchemaFactory.createForClass(User);
+
+export default UserSchema;
+
+//then registering the schema for that module:
+
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import UserSchema, { User } from 'src/Schemas/User.schema';
+
+@Module({
+    imports: [
+        MongooseModule.forFeature([
+            {
+                name: User.name,
+                schema: UserSchema
+            }
+        ])
+    ]
+})
+export class UsersModule {}
+
+In NestJS, you only need a constructor when:
+
+You want to inject dependencies (like other services, repositories, configs, etc.).
+
+You need to initialize something with parameters at class creation time.
+
+//injecting models into your service: 
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from 'src/Schemas/User.schema';
+
+@Injectable()
+export class UsersService { 
+
+constructor(@InjectModel(User.name) private userModel: Model<User>){}
+
+}
+
+@validateNested() decorator-to validate referenced fields
+
