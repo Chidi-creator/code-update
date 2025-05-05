@@ -1,0 +1,47 @@
+to update files on linux
+sudo apt update
+
+for my GUI
+export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
+
+
+//structure of linux commands
+commands - options - options value - argument
+all options are preceeded by hyhens
+structure is seperated by one or more whitespace
+
+
+
+// man page- manuals for commands
+displays manuals or help for each command
+
+man command  --code
+
+navigation -
+ to search /string
+then move btw matches using n
+
+?string to search backwards
+
+types of linux commands 
+-executable files on the disk
+-shell built in commands
+
+to check types of command you use "type" followed by the command
+type df
+
+for shell built in commands like cd you use help
+help cd
+
+for both you just do command --help
+
+
+//ifconfig
+used to display info abt network interdfaces and configure them
+if you want to see the IP or mac address of a network interface you use ifconfig
+
+
+//manual trick
+
+searching for keyword
+man -k ifconfig

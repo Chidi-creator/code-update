@@ -3300,10 +3300,23 @@ npm i typescript ts-node
         "resolveJsonModule": true,
         "allowJs": true,
         "rootDir": "src",
-        "outDir": "dist"
+        "baseUrl": "./",
+        "outDir": "dist",
+        "paths": {
+            "@handlers/*": ["src/handlers/*"],
+            "@models/*": ["src/models/*"],
+            "@repositories/*": ["src/repositories/*"],
+            "@usecases/*": ["src/usecases/*"],
+            "@routes/*": ["src/routes/*"],
+            "@config/*": ["src/config/*"],
+            "@middlewares/*": ["src/middlewares"],
+            "@validation/*": ["src/validation"]
+
+
+        }
     },
     "include": ["src/**/*"]
-}
+}	
 
 
 //nodemon.json (should be in the root folder)
@@ -3614,3 +3627,252 @@ constructor(@InjectModel(User.name) private userModel: Model<User>){}
 
 @validateNested() decorator-to validate referenced fields
 
+
+$regex is a MongoDB operator that allows you to search strings using patterns, just like a search filter.
+
+searching request  using pagination:
+  findAll = async (query: Query): Promise<Array<Book>> => {
+    const resPerPage = 2;
+    const currentPage = Number(query.page) || 1;
+    const skip = resPerPage * (currentPage - 1);
+
+    const keyword = query.keyword
+      ? {
+          title: {
+            $regex: query.keyword,
+            $options: 'i',
+          },
+        }
+      : {};
+    const books = await this.bookModel
+      .find({ ...keyword })
+      .limit(resPerPage)
+      .skip(skip);
+    return books;
+  };
+
+//passport installation
+npm install --save @nestjs/passport passport passport-local
+ npm install --save-dev @types/passport-local
+
+npm install @nestjs/passport passport passport-jwt
+npm install --save-dev @types/passport-jwt
+
+
+
+//auth in nest js
+import { Module } from '@nestjs/common';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import mongoose from 'mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
+import UserSchema, { User } from './schemas/user.schema';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { config } from 'process';
+import { JwtStrategy } from './jwt.strategy';
+
+@Module({
+  imports: [
+
+    PassportModule.register({defaultStrategy: 'jwt'}),
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) =>{
+        return{
+          secret: config.get<string>('JWT_SECRET'),
+          signOptions: {
+            expiresIn: config.get<string | number>('JWT_EXPIRES')
+          }
+        }
+      }
+    }),
+    MongooseModule.forFeature([
+      {
+        name: User.name,
+        schema: UserSchema,
+      },
+    ]),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
+  exports:[JwtStrategy, PassportModule ]
+})
+export class AuthModule {}
+
+
+//passport strategy
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { User } from './schemas/user.schema';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor(
+    @InjectModel(User.name)
+    private userModel: Model<User>,
+  ) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET!,
+    });
+  }
+
+  async validate(payload) {
+    const { id } = payload;
+
+    const user = await this.userModel.findById(id);
+
+    if (!user) throw new UnauthorizedException('Login first to access this');
+
+    return user;
+  }
+}
+
+
+import { SetMetadata } from "@nestjs/common"
+import { Role } from "src/config/constants.config"
+
+export const ROLES_KEY = 'roles'
+export const Roles = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles)
+
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { Observable } from 'rxjs';
+import { Role } from 'src/config/constants.config';
+import { ROLES_KEY } from '../decorators/roles.decorator';
+
+export enum Roles{
+User = "user",
+Admin = "admin",
+Moderator = "moderator"
+}
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredRoles = this.reflector.getAllAndOverride<Role[]>(ROLES_KEY, [
+        context.getHandler(),
+        context.getClass()
+    ] )
+
+
+    if(!requiredRoles) return true
+
+    const request = context.switchToHttp().getRequest()
+
+    const user = request.user
+
+    return matchRoles(requiredRoles, user?.role)
+  }
+}
+
+
+const matchRoles = (requiredRoles: string[], userRole: string) =>{
+        return requiredRoles.some((role: string) => userRole?.includes(role))
+}
+
+
+@Get()
+  @Roles(Role.Moderator, Role.Admin, Role.User)
+  @UseGuards(AuthGuard(), RolesGuard)
+  async findAll(@Query() query: ExpressQuery): Promise<Array<Book>> {
+    const books = await this.bookService.findAll(query);
+    return books;
+  }
+
+constructor(private reflector: Reflector): Reflector is a helper from NestJS used to read metadata set by decorators (like your @Roles() decorator).
+
+zap-blog-v2-git-push
+
+ATBBD7Pcdtpjs2ePxRDvqGnC6VpJFFD894B3
+
+
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import path from "path";
+import { Application } from "express";
+
+//new function to set up the swagger configuration
+const setUpSwagger = (app: Application) => {
+  const options = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "ZAP v2 API Documentation",
+        version: "1.0.0",
+        description: "API documentation",
+      },
+      servers: [
+        { url: "http://localhost:3005" },
+        { url: "https://test-backend-2.zap.africa"},
+      ],
+      components: {
+        securitySchemes: {
+          BearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT",
+          },
+        },
+      },
+    },
+    apis: [
+      path.join(__dirname, "../**/*.js"), // For compiled JS files
+      path.join(__dirname, "../**/*.ts"), // For TS files in development
+      path.join(__dirname, "../routes/**/*.js"), // Common route locations
+      path.join(__dirname, "../routes/**/*.ts"),
+      path.join(__dirname, "../controllers/**/*.js"), // Controller files may have route definitions
+      path.join(__dirname, "../controllers/**/*.ts"),
+      path.join(__dirname, "../deliverymen/**/*.js"), // Your specific directory
+      path.join(__dirname, "../deliverymen/**/*.ts"),
+     
+    ],
+  };
+
+  const specs: swaggerJSDoc.Options = swaggerJSDoc(options);
+  if (!specs) {
+    console.error("Failed to generate Swagger specs");
+    return;
+  }
+
+  console.log(
+    "Generated Swagger paths:",
+    Object.keys((specs as any).paths || {}).length
+  );
+  console.log(
+    "API paths found:",
+    specs.paths ? Object.keys(specs.paths) : "None"
+  );
+
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+  console.log("Swagger UI set up at /api-docs");
+};
+
+export default setUpSwagger;
+
+// killing ports
+netstat -ano | findstr :3005
+taskkill /PID 12345 /F
+
+
+
+
+ const page = req.query.page ? parseInt(req.query.page as string) : 1;
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+  
+      const skip = (page - 1) * limit;
+	
+
+//logging in zap:
+{
+  "email": "chidiebere@zap.africa",
+  "otp": "282267"
+
+}
