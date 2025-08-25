@@ -45,3 +45,13 @@ if you want to see the IP or mac address of a network interface you use ifconfig
 
 searching for keyword
 man -k ifconfig
+ 
+to copy from somewhere to somewhere
+cp <src> <dst>
+if you add the i option it propmots before overwriting any file
+using the -p option preserves the file permission and attribute
+
+moving and renaming files in linux
+mv <src> <dst> src can be multiple files
+moviing all the files using pattern matching *.txt e.g 
+mv <src>* <dst>

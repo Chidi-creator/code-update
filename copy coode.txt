@@ -3276,11 +3276,9 @@ async function generateAndSendPDF(email, amount, currency, transactionId) {
 
 //typescript section 
 
-npm i express @types/express
-npm i nodemon
-npm i mongoose
-npm i @types/mongoose
-npm i typescript ts-node
+
+npm i mongoose nodemon express typescript ts-node tsconfig-paths
+npm i -D @types/mongoose @types/node @types/express
 
  "scripts": {
     "start": "nodemon"
@@ -3875,4 +3873,826 @@ taskkill /PID 12345 /F
   "email": "chidiebere@zap.africa",
   "otp": "282267"
 
+
+   {
+            "_id": "68777408090dc72a4b40d25a",
+            "buyRate": 117075.22457150418,
+            "sellRate": 1519.756838905775,
+            "rate": 0,
+            "buyAmount": 0.000312,
+            "sellAmount": 55512.87244119956,
+            "lpFee": 0.036787041743352775,
+            "lpFeeUsd": null,
+            "depositAccount": {
+                "holderName": "Deposit Account (ChangeNOW)",
+                "number": null,
+                "walletAddress": "361yzszU5JD7eMPhAsTY34EqxvsWZ7vxy2",
+                "bank": null
+            },
+            "withdrawalAccount": {
+                "_id": "682e2937c4779e063731a92e",
+                "currencyId": "678041790fab8ff8dc85cf2b",
+                "countryId": "678041830fab8ff8dc85d198",
+                "bankId": {
+                    "_id": "678041860fab8ff8dc85d211",
+                    "name": "GTBank Plc",
+                    "code": "058",
+                    "shmfbCode": "000013",
+                    "countryId": "678041830fab8ff8dc85d198",
+                    "nativeCurrencyId": {
+                        "_id": "678041790fab8ff8dc85cf2b",
+                        "name": "Naira",
+                        "code": "NGN",
+                        "symbol": "₦",
+                        "isCrypto": false,
+                        "buyRate": 0.000645,
+                        "sellRate": 0.000664,
+                        "isActive": true,
+                        "__v": 1,
+                        "createdAt": "2025-01-09T21:36:57.833Z",
+                        "updatedAt": "2025-04-22T20:01:43.293Z",
+                        "defaultRatesProvider": "Internal",
+                        "preferredRatesProviders": [
+                            "Internal"
+                        ],
+                        "logo": "https://flagcdn.com/ng.svg",
+                        "ath": 0,
+                        "circulatingSupply": 0,
+                        "isStable": false,
+                        "isUserToken": false,
+                        "maxSupply": 0,
+                        "preferredNewsProviders": [],
+                        "preferredTokenMetricsProviders": [],
+                        "totalSupply": 0,
+                        "volatility": 0
+                    },
+                    "__v": 0,
+                    "createdAt": "2025-01-09T21:37:10.737Z",
+                    "updatedAt": "2025-01-09T21:37:10.737Z",
+                    "icon": "https://res.cloudinary.com/dukdbbrbc/image/upload/v1683643352/image/1683643352356.png"
+                },
+                "userId": "67ae3e09671830622aa080e6",
+                "name": "GTBank Plc",
+                "holderName": "OMOSIPE  BUSOLA EMMANUEL",
+                "number": "8164109513",
+                "isPlayer": false,
+                "inflowSingleLimit": 0,
+                "inflowDailyLimit": 0,
+                "outflowSingleLimit": 0,
+                "outflowDailyLimit": 0,
+                "balance": 0,
+                "type": "ACCOUNT_CREATED",
+                "position": "DEF",
+                "benchStatus": false,
+                "createdAt": "2025-05-21T19:27:51.218Z",
+                "updatedAt": "2025-05-21T19:27:51.218Z",
+                "__v": 0
+            },
+            "createdAt": "2025-07-16T09:42:32.574Z",
+            "expiresAt": "2025-07-16T10:02:28.003Z",
+            "status": "EXPIRED",
+            "buyCurrency": {
+                "_id": "6780418b0fab8ff8dc85d4fc",
+                "currencyId": {
+                    "_id": "6780417c0fab8ff8dc85d03e",
+                    "name": "Bitcoin",
+                    "code": "BTC",
+                    "symbol": "BTC",
+                    "isCrypto": true,
+                    "buyRate": 0,
+                    "sellRate": 0,
+                    "isActive": true,
+                    "__v": 0,
+                    "createdAt": "2025-01-09T21:37:00.177Z",
+                    "updatedAt": "2025-06-17T12:06:40.474Z",
+                    "logo": "https://res.cloudinary.com/dbkwvangu/image/upload/v1747862685/currencies/logos/bitcoin.svg",
+                    "defaultNewsProvider": "CryptoCompare",
+                    "defaultRatesProvider": "DexScreener",
+                    "preferredNewsProviders": [
+                        "CryptoCompare"
+                    ],
+                    "preferredRatesProviders": [
+                        "DexScreener",
+                        "Live Coin",
+                        "CoinMarketCap",
+                        "Coin Gecko"
+                    ],
+                    "preferredTokenMetricsProviders": [
+                        "DexScreener",
+                        "Live Coin",
+                        "CoinMarketCap",
+                        "Coin Gecko"
+                    ],
+                    "ath": 0,
+                    "circulatingSupply": 0,
+                    "isStable": false,
+                    "isUserToken": false,
+                    "maxSupply": 0,
+                    "totalSupply": 0,
+                    "volatility": 0
+                },
+                "chainId": {
+                    "_id": "678041880fab8ff8dc85d452",
+                    "name": "Bitcoin",
+                    "symbol": "BTC",
+                    "nativeCurrencySymbol": "BTC",
+                    "chainId": 999999,
+                    "nativeCurrencyId": "6780417c0fab8ff8dc85d03e",
+                    "isEVM": false,
+                    "__v": 0,
+                    "createdAt": "2025-01-09T21:37:12.490Z",
+                    "updatedAt": "2025-01-09T21:37:12.490Z",
+                    "explorerUrl": "https://blockchain.com",
+                    "rpcUrl": "https://rpc.ankr.com/btc/fb70284e3b8740f217f95917148ddf9dacb4b651038cda31504c9e9c922461dd",
+                    "transactionRpc": "https://rpc.ankr.com/premium-http/btc_blockbook/fb70284e3b8740f217f95917148ddf9dacb4b651038cda31504c9e9c922461dd"
+                },
+                "tokenAddress": null,
+                "decimals": 8,
+                "__v": 1,
+                "createdAt": "2025-01-09T21:37:15.884Z",
+                "updatedAt": "2025-05-22T09:08:00.689Z",
+                "image": "https://res.cloudinary.com/dbkwvangu/image/upload/v1747927465/Updated/BTC/Bitcoin_oulleo.svg",
+                "defaultBalancesProvider": "Ethers",
+                "defaultTradesProvider": "ChangeNow",
+                "defaultTransactionsProvider": "Moralis",
+                "preferredBalancesProviders": [
+                    "Ethers",
+                    "Web3"
+                ],
+                "preferredTradesProviders": [
+                    "ChangeNow",
+                    "FixedFloat"
+                ],
+                "preferredTransactionsProviders": [
+                    "Moralis"
+                ],
+                "isActive": true,
+                "isStable": false,
+                "preferredRPCProviders": []
+            },
+            "sellCurrency": {
+                "_id": "67eff7632c3e4a50c3d07694",
+                "currencyId": {
+                    "_id": "678041790fab8ff8dc85cf2b",
+                    "name": "Naira",
+                    "code": "NGN",
+                    "symbol": "₦",
+                    "isCrypto": false,
+                    "buyRate": 0.000645,
+                    "sellRate": 0.000664,
+                    "isActive": true,
+                    "__v": 1,
+                    "createdAt": "2025-01-09T21:36:57.833Z",
+                    "updatedAt": "2025-04-22T20:01:43.293Z",
+                    "defaultRatesProvider": "Internal",
+                    "preferredRatesProviders": [
+                        "Internal"
+                    ],
+                    "logo": "https://flagcdn.com/ng.svg",
+                    "ath": 0,
+                    "circulatingSupply": 0,
+                    "isStable": false,
+                    "isUserToken": false,
+                    "maxSupply": 0,
+                    "preferredNewsProviders": [],
+                    "preferredTokenMetricsProviders": [],
+                    "totalSupply": 0,
+                    "volatility": 0
+                },
+                "chainId": null,
+                "tokenAddress": null,
+                "decimals": null,
+                "__v": 1,
+                "createdAt": "2025-01-09T21:37:15.884Z",
+                "updatedAt": "2025-05-22T09:08:03.193Z",
+                "preferredBalancesProviders": [
+                    "Safe Haven",
+                    "Internal"
+                ],
+                "image": "https://res.cloudinary.com/dbkwvangu/image/upload/v1747927465/Updated/NGN/Naira_wzmpuy.svg",
+                "defaultTradesProvider": "Safe Haven",
+                "defaultBalancesProvider": "Safe Haven",
+                "defaultTransactionsProvider": "Safe Haven",
+                "preferredTradesProviders": [
+                    "Safe Haven",
+                    "Internal"
+                ],
+                "preferredTransactionsProviders": [
+                    "Safe Haven"
+                ],
+                "isActive": true,
+                "isStable": false,
+                "preferredRPCProviders": []
+            },
+            "childOrder": {
+                "_id": "68777408090dc72a4b40d260",
+                "userId": {
+                    "_id": "67ae3e09671830622aa080e6",
+                    "firstName": "Busola",
+                    "lastName": "Omosipe"
+                },
+                "flow": "SELL",
+                "currencyId": {
+                    "_id": "678041790fab8ff8dc85cf2b",
+                    "name": "Naira",
+                    "code": "NGN",
+                    "isCrypto": false,
+                    "logo": "https://flagcdn.com/ng.svg"
+                },
+                "buyChain": null,
+                "openAmount": 55512.87244119956,
+                "amount": 0,
+                "calculatedAmount": 0,
+                "openRate": 1519.756838905775,
+                "rate": 0,
+                "calculatedRate": 0,
+                "status": "EXPIRED",
+                "depositAccountIds": [
+                    {
+                        "_id": "682e2937c4779e063731a92e",
+                        "currencyId": "678041790fab8ff8dc85cf2b",
+                        "countryId": "678041830fab8ff8dc85d198",
+                        "bankId": "678041860fab8ff8dc85d211",
+                        "userId": "67ae3e09671830622aa080e6",
+                        "name": "GTBank Plc",
+                        "holderName": "OMOSIPE  BUSOLA EMMANUEL",
+                        "number": "8164109513",
+                        "isPlayer": false,
+                        "inflowSingleLimit": 0,
+                        "inflowDailyLimit": 0,
+                        "outflowSingleLimit": 0,
+                        "outflowDailyLimit": 0,
+                        "balance": 0,
+                        "type": "ACCOUNT_CREATED",
+                        "position": "DEF",
+                        "benchStatus": false,
+                        "createdAt": "2025-05-21T19:27:51.218Z",
+                        "updatedAt": "2025-05-21T19:27:51.218Z",
+                        "__v": 0
+                    }
+                ],
+                "withdrawalAccountIds": [
+                    {
+                        "_id": "682e2937c4779e063731a92e",
+                        "currencyId": "678041790fab8ff8dc85cf2b",
+                        "countryId": "678041830fab8ff8dc85d198",
+                        "bankId": {
+                            "_id": "678041860fab8ff8dc85d211",
+                            "name": "GTBank Plc",
+                            "code": "058",
+                            "shmfbCode": "000013",
+                            "countryId": "678041830fab8ff8dc85d198",
+                            "nativeCurrencyId": {
+                                "_id": "678041790fab8ff8dc85cf2b",
+                                "name": "Naira",
+                                "code": "NGN",
+                                "symbol": "₦",
+                                "isCrypto": false,
+                                "buyRate": 0.000645,
+                                "sellRate": 0.000664,
+                                "isActive": true,
+                                "__v": 1,
+                                "createdAt": "2025-01-09T21:36:57.833Z",
+                                "updatedAt": "2025-04-22T20:01:43.293Z",
+                                "defaultRatesProvider": "Internal",
+                                "preferredRatesProviders": [
+                                    "Internal"
+                                ],
+                                "logo": "https://flagcdn.com/ng.svg",
+                                "ath": 0,
+                                "circulatingSupply": 0,
+                                "isStable": false,
+                                "isUserToken": false,
+                                "maxSupply": 0,
+                                "preferredNewsProviders": [],
+                                "preferredTokenMetricsProviders": [],
+                                "totalSupply": 0,
+                                "volatility": 0
+                            },
+                            "__v": 0,
+                            "createdAt": "2025-01-09T21:37:10.737Z",
+                            "updatedAt": "2025-01-09T21:37:10.737Z",
+                            "icon": "https://res.cloudinary.com/dukdbbrbc/image/upload/v1683643352/image/1683643352356.png"
+                        },
+                        "userId": "67ae3e09671830622aa080e6",
+                        "name": "GTBank Plc",
+                        "holderName": "OMOSIPE  BUSOLA EMMANUEL",
+                        "number": "8164109513",
+                        "isPlayer": false,
+                        "inflowSingleLimit": 0,
+                        "inflowDailyLimit": 0,
+                        "outflowSingleLimit": 0,
+                        "outflowDailyLimit": 0,
+                        "balance": 0,
+                        "type": "ACCOUNT_CREATED",
+                        "position": "DEF",
+                        "benchStatus": false,
+                        "createdAt": "2025-05-21T19:27:51.218Z",
+                        "updatedAt": "2025-05-21T19:27:51.218Z",
+                        "__v": 0
+                    }
+                ],
+                "parentOrder": "68777408090dc72a4b40d25a",
+                "childOrder": null,
+                "provider": "Safe Haven",
+                "expiresAt": "2025-07-16T10:02:28.003Z",
+                "createdAt": "2025-07-16T09:42:32.727Z"
+            }
+        },
 }
+
+npm i socket-io
+npm i @types/socket-io
+npm install @types/socket.io-client --save-dev
+
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
+import fs from "fs";
+import path from "path";
+import BanksUseCase from "@usecases/banks.usecase";
+import { IBank } from "@models/types/Bank";
+import fileManager from "@managers/file.manager";
+
+const banksUseCase = new BanksUseCase();
+
+// Adjust this path as needed for your system
+const ICON_FOLDER = path.join(
+  process.env.HOME || process.env.USERPROFILE || "",
+  "Downloads",
+  "bank logos"
+);
+
+const uploadBankIcons = async (): Promise<IBank[]> => {
+  try {
+    const banks = await banksUseCase.getAllBanks();
+    const files = fs.readdirSync(ICON_FOLDER);
+
+    for (const fileName of files) {
+      const fileBaseName = path.parse(fileName).name.toLowerCase().replace(/\s+/g, "").trim();
+      const filePath = path.join(ICON_FOLDER, fileName);
+
+      const matchedBank = banks.find((bank) =>
+        bank.name?.toLowerCase().replace(/\s+/g, "").trim() === fileBaseName
+      );
+
+      if (matchedBank) {
+        try {
+          const uploadResult = await fileManager.uploadFile(filePath, {
+            fileName,
+            path: `banks/icons`,
+            metadata: {},
+          });
+
+          matchedBank.icon = uploadResult.secure_url;
+
+          console.log(`✅ Uploaded icon for ${matchedBank.name}`);
+        } catch (uploadError) {
+          console.error(`❌ Failed to upload ${fileName}:`, uploadError);
+        }
+      } else {
+        console.warn(`⚠️ No matching bank found for file: ${fileName}`);
+      }
+    }
+
+    // Only returning the updated list (no DB writes)
+    return banks;
+  } catch (error) {
+    console.error("🔥 Error in uploadBankIcons:", error);
+    throw error;
+  }
+};
+
+export default uploadBankIcons;
+
+
+import BanksUseCase from "@usecases/banks.usecase";
+import path from "path";
+import { Request, Response } from "express";
+import ResponseManager from "@managers/response.manager";
+import fs from "fs";
+import { IBank } from "@models/types/Bank";
+
+const banksUseCase = new BanksUseCase();
+
+const ICONS_FOLDER = "C:/Users/HP/Downloads/Bank Logos";
+
+
+
+const uploadBankIcons = async (): Promise<
+  Array<{ bankName: string; matchedFile: string }>
+> => {
+  console.log("ICONS_FOLDER path:", ICONS_FOLDER);
+  console.log("ICONS_FOLDER exists:", fs.existsSync(ICONS_FOLDER));
+
+  try {
+    // Step 1: Get banks and log them
+    console.log("🔍 Getting banks...");
+    const banks = await banksUseCase.getAllBanks();
+    console.log(`📊 Total banks found: ${banks?.length || 0}`);
+    
+    if (banks && banks.length > 0) {
+      console.log("📝 First 5 bank names:");
+      banks.slice(0, 5).forEach((bank, index) => {
+        console.log(`  ${index + 1}. "${bank.name}"`);
+      });
+    } else {
+      console.log("❌ No banks found in database!");
+      return [];
+    }
+
+    // Step 2: Get files and log them
+    console.log("🔍 Reading files from folder...");
+    const files = fs.readdirSync(ICONS_FOLDER);
+    console.log(`📊 Total files found: ${files.length}`);
+    
+    if (files.length > 0) {
+      console.log("📝 First 10 file names:");
+      files.slice(0, 10).forEach((file, index) => {
+        console.log(`  ${index + 1}. "${file}"`);
+      });
+    } else {
+      console.log("❌ No files found in icons folder!");
+      return [];
+    }
+
+    // Step 3: Show normalization examples
+    console.log("🔄 Normalization examples:");
+    console.log("Banks (first 3 normalized):");
+    banks.slice(0, 3).forEach(bank => {
+      const normalized = bank.name?.toLowerCase().replace(/\s+/g, "");
+      console.log(`  "${bank.name}" -> "${normalized}"`);
+    });
+    
+    console.log("Files (first 3 normalized):");
+    files.slice(0, 3).forEach(file => {
+      const normalized = path.parse(file).name.toLowerCase().replace(/\s+/g, "");
+      console.log(`  "${file}" -> "${normalized}"`);
+    });
+
+    // Step 4: Matching process with detailed logging
+    const matches: Array<{ bankName: string; matchedFile: string }> = [];
+    
+    console.log("🔍 Starting matching process...");
+    
+    for (const fileName of files) {
+      const baseName = path
+        .parse(fileName)
+        .name.toLowerCase()
+        .replace(/\s+/g, "");
+
+      console.log(`\n  Processing: "${fileName}" -> "${baseName}"`);
+      
+      const matchedBank = banks.find((bank) => {
+        const bankNameNormalized = bank.name?.toLowerCase().replace(/\s+/g, "");
+        const isMatch = bankNameNormalized === baseName;
+        
+        if (isMatch) {
+          console.log(`    ✅ MATCH! "${bank.name}" (${bankNameNormalized}) matches "${fileName}" (${baseName})`);
+        }
+        
+        return isMatch;
+      });
+      
+      if (matchedBank) {
+        matches.push({
+          bankName: matchedBank.name,
+          matchedFile: fileName,
+        });
+      } else {
+        console.log(`    ❌ No match for "${fileName}" (${baseName})`);
+      }
+    }
+
+    console.log(`\n🎯 Final result: ${matches.length} matches found`);
+    console.log("Matched Banks and Files:", JSON.stringify(matches, null, 2));
+    
+    return matches;
+  } catch (error) {
+    console.error("Error matching bank icons:", error);
+    throw error;
+  }
+};
+
+export default uploadBankIcons;
+
+
+
+
+   resource_type?: "image" | "video" | "raw" | "auto";
+
+
+  const uploadOptions: UploadApiOptions = {
+        folder: options.path ?? this.folder,
+    resource_type: options.resource_type ?? "auto",
+        public_id: options.fileName,
+        metadata: options.metadata,
+      };
+
+export type FileUploadType = {
+  path: string;
+  fileName: string;
+  metadata: Record<string, unknown>;
+    resource_type?: "image" | "video" | "raw" | "auto"; // ✅ Add this
+};
+
+
+//sequelize
+
+npm install --save sequelize
+
+ npm install --save pg pg-hstore // for postgres
+
+npm install --save-dev sequelize-cli // for running cli
+
+
+
+.sequelizerc
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("config", "config.js"),
+  "models-path": path.resolve("db", "models"),
+  "seeders-path": path.resolve("db", "seeders"),
+  "migrations-path": path.resolve("db", "migrations"),
+};
+
+
+the config part
+ "development": {
+    "username": process.env.DB_USERNAME,
+    "password": process.env.PASSWORD,
+    "database": process.env.DB_NAME,
+    "host":process.env.DB_HOST,
+    "post": process.env.DB_PORT,
+    "dialect": "postgres"
+  },
+
+ npx sequelize-cli init // to initialise sequelise
+
+npx sequelize-cli db:create // to create db
+
+cli for generating model:
+npx sequelize-cli model:generate --name user --attributes userType:ENUM,firstname:string,lastname:string, email:string,password:string
+
+ npx sequelize-cli db:migrate// for migrating data
+
+
+Qi951ew1qvSNT0Jj
+
+
+
+
+  async findingBanksWithoutIcons(): Promise<{ banks: IBank[]; count: number }> {
+    try {
+      const banks = await Bank.aggregate([
+        {
+          $match: {
+            $or: [{ icon: "" }, { icon: { $exists: false } }],
+            deletedAt: null,
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            icon: {
+              $ifNull: ["$icon", ""],
+            },
+          },
+        },
+      ]);
+
+      return { banks, count: banks.length };
+    } catch (error: any) {
+      throw new DatabaseError(
+        `Error retreiving banks without logos: ${error.message}`
+      );
+    }
+  }
+
+  async findingBanksWithoutIcons() {
+    try {
+      const {banks, count} = await this.banksRepository.findingBanksWithoutIcons();
+      return {banks, count};
+    } catch (error: any) {
+      throw error
+    }
+  }
+
+  findingBanksWithoutIcons = async (req: Request, res: Response) => {
+    try {
+      const {banks, count} = await this.banksUseCase.findingBanksWithoutIcons();
+      return responseManager.success(
+        res,
+        {banks, count},
+        "Banks without Icons retrieved successfully"
+      );
+    } catch (error: any) {
+      return responseManager.handleError(res, error);
+    }
+  };
+
+
+router.route("/without-icons").get(banksHandler.findingBanksWithoutIcons);
+
+
+ const processor = async (jobData: any) => {
+  console.log("✅ Running verification watcher");
+  logger.info("Running stale verification rejection job...");
+
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000); // Current time minus one hour
+
+  const staleVerifications = await verificationUseCase.findVerificationsByQuery({
+    status: VERIFICATION_STATUS.pending,
+  });
+
+  for (const verification of staleVerifications.verifications) {
+    // Ensure `submittedAt` is older than one hour
+    if (new Date(verification.submittedAt) < oneHourAgo) {
+      await verificationUseCase.updateVerification(verification._id, {
+        status: VERIFICATION_STATUS.rejected,
+      });
+
+      if (verification.userId) {
+        const user = await usersUseCase.getUserById(verification.userId);
+        if (user?.email) {
+          const emailBody = `
+            <p>Hello ${user.firstName || "there"},</p>
+            <p>Your <strong>${verification.verificationType}</strong> verification request has expired and has been rejected.</p>
+            <p>Please re-submit if you'd like to verify again.</p>
+            <p>– Zap Africa</p>
+          `;
+
+          notificationService.sendNotification(
+            [NotificationChannel.EMAIL],
+            {
+              to: user.email,
+              from: env.EMAIL_USERNAME || "",
+              subject: "Your Verification Request Has Expired",
+              templateData: emailBody,
+            },
+            NotificationType.USER,
+            user._id
+          );
+        }
+
+        logger.info(`Rejected stale verification: ${verification._id.toString()} for user: ${verification.userId.toString()}`);
+      }
+    }
+  }
+
+  logger.info(`Processed ${staleVerifications.totalCount} stale verifications.`);
+  return "Stale verification rejection completed.";
+};
+
+passport authentication in nestJs//
+
+ npm install --save @nestjs/passport passport passport-local
+npm install --save-dev @types/passport-local
+npm install passport-jwt
+npm install --save-dev @types/passport-jwt
+
+create a jwt.strategy file in the auth module
+
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { User } from './schemas/users.schema';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+  constructor(
+    @InjectModel(User.name)
+    private userModel: Model<User>,
+  ) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET as string,
+    });
+  }
+
+  async validate(payload) {
+    const { id } = payload;
+
+    const user = await this.userModel.findById(id);
+
+    if (!user) throw new UnauthorizedException('Unauthorized user');
+
+    return user;
+  }
+}
+
+//then in the user/auth module
+import { Module } from '@nestjs/common';
+import { UserService } from './users.service';
+import { UsersController } from './users.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import UserSchema, { User } from './schemas/users.schema';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { config } from 'process';
+import { JwtStrategy } from './jwt.strategy';
+
+@Module({
+  imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          secret: config.get<string>('JWT_SECRET'),
+          signOptions: {
+            expiresIn: config.get<string | number>('JWT_EXPIRES'),
+          },
+        };
+      },
+    }),
+
+    MongooseModule.forFeature([
+      {
+        name: User.name,
+        schema: UserSchema,
+      },
+    ]),
+  ],
+  providers: [UserService, JwtStrategy],
+  controllers: [UsersController],
+})
+export class UsersModule {}
+
+how its used in the controller//
+@Post()
+@UseGuards(AuthGuard('jwt'))
+
+
+//mistakeny commit to the wrong branch
+git reset --soft HEAD~1
+git stash         # temporarily saves your changes
+git checkout your-other-branch
+git stash pop     # brings back your changes
+
+GitHub Copilot
+Based on the image, here are the endpoints you should make available to the frontend:
+
+Get current product retail prices
+
+GET /prices/current
+Returns latest prices for PMS, AGO, ICE, DPK, LPG (optionally by region/state).
+Get price history for a product
+
+GET /prices/history?product=PMS&period=2024-07-01
+Returns historical price data for a selected product (PMS, AGO, ICE, DPK, LPG).
+Get price performance (change, percentage)
+
+GET /prices/performance?product=PMS
+Returns price change and percentage for a product.
+Get prices by region/state
+
+GET /prices?region=South%20East&state=Abia
+Returns prices filtered by region and/or state.
+Get all available regions and states
+
+GET /prices/regions
+GET /prices/states
+For populating dropdowns/filters.
+Search prices
+
+GET /prices/search?query=Abia
+For search functionality.
+Get report for a specific week
+
+GET /prices/report?week=31&year=2024
+Returns report data for a given week.
+Summary:
+
+/prices/current
+/prices/history
+/prices/performance
+/prices?region=&state=
+/prices/regions
+/prices/states
+/prices/search
+/prices/report
+These endpoints will cover all the data needs shown in your Figma design.
+
+
+function getEnvVar(key: string): string {
+  const value = process.env[key];
+  if (!value) {
+    throw new Error(`Missing environment variable: ${key}`);
+  }
+  return value;
+}
+
+//passport usage proper in ts
+npm install passport passport-jwt
+npm install --save-dev @types/passport-jwt
+
+steps to using cron in ts
+npm install bullmq node-cron nodemailer ioredis
+npm install --save-dev @types/node
+
